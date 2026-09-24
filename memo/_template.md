@@ -8,8 +8,8 @@ HOW TO USE THIS TEMPLATE (delete this block before you submit)
   Project C: your README asks one question, "Which 10 should Lantern Local call first, and why?"
   Use the parts your README breaks it into as the headers.
 - Write for the person who asked. Plain words, no jargon they'd have to look up.
-- Every number, name, date and quote has a row in someone's logs/<name>.md.
-  No row, no claim.
+- Every number, name, date and quote cites its source: file and row, or URL.
+  No source, no claim.
 - Unverified claims stay in, marked "(unverified)". Don't quietly drop them.
 -->
 
@@ -33,4 +33,4 @@ HOW TO USE THIS TEMPLATE (delete this block before you submit)
 
 ---
 
-**Sources:** <data files and columns used, e.g. `data/<file>.csv` (columns ...)> · <URLs, with the date opened> · Verification logs: `logs/<name>.md`, `logs/<name>.md`, ... · Word count: <n>
+**Sources:** <data files and columns used, e.g. `data/<file>.csv` (columns ...)> · <URLs, with the date opened> · Word count: <n>

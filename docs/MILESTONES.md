@@ -4,7 +4,7 @@ Three milestones, pass/fail. One file for all three projects: the shared boxes f
 
 | When (America/Chicago) | What |
 |---|---|
-| **Sun Sep 27, 11:59pm** | SETUP, individual: GitHub username + hello URL (see `SETUP.md`) |
+| **Sun Sep 27, 11:59pm** | SETUP, individual: GitHub username + your own calculator URL (see `SETUP.md`) |
 | **Sun Oct 4, 11:59pm** | **M1**: the read, deployed `web/`, schema |
 | **Sun Oct 11, 11:59pm** | **M2**: the build |
 | **Sun Oct 18, 11:59pm** | **M3**: evals + Loom + peer review |
@@ -12,7 +12,7 @@ Three milestones, pass/fail. One file for all three projects: the shared boxes f
 
 ## What "pass" means
 
-- **Every box is checked, with evidence someone else could check.** Something Hamza can open or run: the live URL, a file path on `main`, a PR, an Actions run, a query and its result, a row in a log.
+- **Every box is checked, with evidence someone else could check.** Something Hamza can open or run: the live URL, a file path on `main`, a PR, an Actions run, a query and its result.
 - A box with no evidence is an unchecked box. "It works on my machine" is not evidence.
 - Hamza checks your fork's `main` branch and your live URL. A paused Supabase project means a broken live URL. Open your live URL the day you submit.
 
@@ -31,7 +31,6 @@ Checked per person. A group can pass while one member misses these. That miss is
 
 - [ ] **You own 2 or more GitHub Issues** in this milestone (you're the assignee), each with a done-condition.
 - [ ] **You authored 1 or more merged PRs** in this milestone.
-- [ ] **`logs/<name>.md` is updated** for this milestone, in the Week 1 format: `| Claim | Source | Tier | Verdict |`. Rows for your share of the work. See `VERIFY.md`.
 - [ ] **`logs/hours.md` has your honest hours** for this milestone.
 
 ---
@@ -41,7 +40,7 @@ Checked per person. A group can pass while one member misses these. That miss is
 ### All projects
 
 - [ ] **The read:** a memo of 400 words or fewer, answering your project's question(s) from the data. Template: `templates/memo.md`. Committed to `main`. Its path is in your submission.
-- [ ] **Every specific in the read has a row** in at least one member's `logs/<name>.md`.
+- [ ] **Every number or fact in the read cites its source** (file and row, or URL).
 - [ ] **`web/` is deployed** from the owner's Vercel project (Root Directory `web`) at a live URL, connected to the group's Supabase project.
 
 ### Project A: Bayou Detail full-stack
@@ -58,7 +57,7 @@ Checked per person. A group can pass while one member misses these. That miss is
 
 ### Project C: prospect research agent
 
-- [ ] The read answers **"Which 10 should Lantern Local call first, and why?"**, 400 words or fewer. **Every claim is tied to a URL** in the logs.
+- [ ] The read answers **"Which 10 should Lantern Local call first, and why?"**, 400 words or fewer. **Every claim cites its URL.**
 - [ ] The **schema**, as SQL committed to the repo.
 
 ---
@@ -132,7 +131,7 @@ For each teammate:
 | **Quality of work:** did their work hold up when someone checked it? | 1 to 5 |
 | **One sentence** about their work | Text |
 
-Rate what you saw: issues, PRs, reviews, logs. Not how much you like them.
+Rate what you saw: issues, PRs, reviews, hours. Not how much you like them.
 
 ---
 

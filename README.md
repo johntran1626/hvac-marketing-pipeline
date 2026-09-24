@@ -6,8 +6,8 @@ New here? Start with [docs/SETUP.md](docs/SETUP.md).
 
 | | What | Due |
 |---|---|---|
-| **Setup** | Everyone's accounts and tools, and a hello URL deployed. See [docs/SETUP.md](docs/SETUP.md) | Sun Sep 27, 11:59pm CT |
-| **M1** | **The read.** A memo to Diane, the owner, plus each member's verification log. The app skeleton deployed and a first pull from the API | **Sun Oct 4, 11:59pm CT** |
+| **Setup** | Everyone's accounts and tools, and your own calculator URL deployed. See [docs/SETUP.md](docs/SETUP.md) | Sun Sep 27, 11:59pm CT |
+| **M1** | **The read.** A memo to Diane, the owner, with a source for every number. The app skeleton deployed and a first pull from the API | **Sun Oct 4, 11:59pm CT** |
 | **M2** | **The build.** The worker, the schema and the dashboard | **Sun Oct 11, 11:59pm CT** |
 | **M3** | **Prove it.** The data-quality eval, an anomaly alert, a Loom, and the peer review | **Sun Oct 18, 11:59pm CT** |
 | **Live Q&A** | Your group answers my questions about your project, live | Thu Oct 22, 6pm CT |
@@ -24,7 +24,7 @@ Budget **4 to 6 hours per person per week**. If a week is running past six, stop
 
 **How your group is graded:**
 - **Each milestone is a pass/fail checklist.** The checklists are in [docs/MILESTONES.md](docs/MILESTONES.md). You should never be guessing at what's being checked. Miss a box and you get one fix-up round, explained there.
-- **Each of you is accountable, every milestone.** Every member owns at least 2 GitHub Issues, authors at least 1 merged PR, keeps their own verification log in `logs/<name>.md`, and adds their hours to `logs/hours.md`. The group's work is checked once. Your part of it is checked too.
+- **Each of you is accountable, every milestone.** Every member owns at least 2 GitHub Issues, authors at least 1 merged PR, and adds their hours to `logs/hours.md`. The group's work is checked once. Your part of it is checked too.
 - **Peer review at M3.** You'll privately rate each teammate on contribution, reliability and quality (1 to 5), with one sentence each. Only I read it. It feeds Build-phase placement, not grades.
 
 **Use whatever AI you want.** Claude, Cursor, whatever. I do. I'd think less of you if you didn't. What's graded is whether *you* reviewed, verified, and adjusted what came out. That is the Week 1 lesson, applied.
@@ -104,11 +104,11 @@ Use the snapshot. Charts optional. If you make one, it should carry the argument
 
 Write it for Diane. She runs an HVAC company, not a data team.
 
-### Each of you: a verification log
+### Every number has a source
 
-The memo is the group's. The log is yours. Split the analysis between you however you like, then **each member keeps a verification log for their share** in `logs/<name>.md`, in the Week 1 format: every specific claim, its source, the tier of evidence, the verdict. [logs/README.md](logs/README.md) explains the format and `logs/_template.md` is your starting file.
+Every number or fact in the memo cites where it came from: the file and row (or the query or script that produced it), or a URL. List them in the memo's **Sources** line. If you can't point at where a number came from, cut it.
 
-A log where nothing was ever wrong is a warning sign, not an A. Every dataset in this lab was built so that a model gets things wrong on it. Find where.
+Every dataset in this lab was built so that a model gets things wrong on it. Find where.
 
 ### The skeleton
 
@@ -199,8 +199,8 @@ Read these before you start:
 | [docs/SETUP.md](docs/SETUP.md) | Accounts and installs. Due Sun Sep 27 |
 | [docs/WORKFLOW.md](docs/WORKFLOW.md) | Fork, collaborators, branches, PRs, who merges, Vercel settings, enabling Actions |
 | [docs/STACK.md](docs/STACK.md) | Next.js, Supabase and Vercel, their free-plan limits, and where long jobs go |
+| [docs/WORKING-WITH-CLAUDE.md](docs/WORKING-WITH-CLAUDE.md) | How to work with Claude: small pieces, one conversation each, check what comes back. Read this first |
 | [docs/CLAUDE-CODE.md](docs/CLAUDE-CODE.md) | Driving Claude Code without burning through your usage |
-| [docs/VERIFY.md](docs/VERIFY.md) | The six failure modes and the verification log |
 | [docs/MILESTONES.md](docs/MILESTONES.md) | The pass/fail checklists for M1, M2 and M3 |
 | [docs/API.md](docs/API.md) | The API: auth, dates, paging, rate limits, every endpoint |
 
@@ -212,7 +212,7 @@ Read these before you start:
 
 By each deadline, the fork owner replies to my email thread for your group. One reply per group, in the format in [docs/MILESTONES.md](docs/MILESTONES.md): your fork URL, your live URL, the path to the memo (M1), and the Loom link (M3).
 
-Everything else lives in the repo: the memo in `memo/`, the logs and hours in `logs/`. I check your fork's `main` branch, your Actions runs and your live URL, so merge before you reply. Before you send it: `HZapperz` is a collaborator on the fork, and the live URL works in a private window.
+Everything else lives in the repo: the memo in `memo/`, the hours in `logs/`. I check your fork's `main` branch, your Actions runs and your live URL, so merge before you reply. Before you send it: `HZapperz` is a collaborator on the fork, and the live URL works in a private window.
 
 ---
 

@@ -7,10 +7,10 @@ One fork. One owner. Every change goes through an issue, a branch and a pull req
 | Role | Who | Owns |
 |---|---|---|
 | **Owner** | One member | The private fork, the Vercel project, the Supabase org and project. Merges every PR |
-| **Member** | Everyone, the owner included | Issues, branches, PRs, reviews, their own log |
+| **Member** | Everyone, the owner included | Issues, branches, PRs, reviews, their own hours |
 | **Hamza** | Instructor, GitHub `HZapperz` | Collaborator on the fork and on Supabase. Checks milestones |
 
-Pick an owner who is reliable and has a free Supabase project slot (pause your hello project if you need to free one). The owner is the only person who can deploy. Choose accordingly.
+Pick an owner who is reliable and has a free Supabase project slot (pause your calculator project if you need to free one). The owner is the only person who can deploy. Choose accordingly.
 
 ---
 
@@ -53,12 +53,12 @@ npm run dev
 | 1 | You | Take an issue, or open one with the **Task** template. Assign yourself |
 | 2 | You | Update `main`: `git switch main` then `git pull` |
 | 3 | You | Branch, issue number first: `git switch -c 12-booking-form` |
-| 4 | You | Work. Commit before each Claude task. Read each diff ([CLAUDE-CODE.md](CLAUDE-CODE.md)) |
+| 4 | You | Work. Commit before each Claude task. Read each diff ([WORKING-WITH-CLAUDE.md](WORKING-WITH-CLAUDE.md)) |
 | 5 | You | Push: `git push -u origin 12-booking-form` |
 | 6 | You | Open a PR on GitHub. Fill in the template. Write `Closes #12` so the issue closes on merge |
 | 7 | A teammate | Review (below). Approve or request changes |
 | 8 | **The owner** | Merge with **Create a merge commit**. Not squash. Not rebase |
-| 9 | You | Vercel deploys `main`. Open the live URL and check your change. Log it |
+| 9 | You | Vercel deploys `main`. Open the live URL and check your change |
 | 10 | Everyone | `git switch main` then `git pull` |
 
 The git commands are the same on Windows and macOS.
@@ -84,10 +84,10 @@ git switch 12-booking-form
 Then check four things:
 1. **It runs.** You ran it and watched it work, not just read it.
 2. **The diff.** Every changed file makes sense. No stray files, no leftover scaffold, no debug junk.
-3. **The "How verified" claim.** The tier is honest. If it says tier 1, you can repeat the check.
+3. **The "How I verified it" section.** It says what they ran and what they saw, and you can repeat the check.
 4. **No secrets.** No `.env` files, keys or passwords anywhere in the diff.
 
-Leave comments on the lines. "Looks good" on a PR you didn't run is a tier 4 review.
+Leave comments on the lines. "Looks good" on a PR you didn't run isn't a review.
 
 ---
 
@@ -107,9 +107,8 @@ GitHub only uses the templates from `.github/ISSUE_TEMPLATE/` and `.github/PULL_
 - **Decisions go in the issue.** If you decided something in chat, write it in the issue in one or two lines. Chat scrolls away. Hamza reads issues, not your chat.
 - **Announcements** from Hamza come by email only.
 
-## Logs
+## Hours
 
-- **`logs/<name>.md`:** your verification log. Format and rules in [VERIFY.md](VERIFY.md). Template: [templates/verification-log.md](templates/verification-log.md).
 - **`logs/hours.md`:** everyone's hours, one section per person. Log the day you work, honestly. Template: [templates/hours.md](templates/hours.md).
 
 ## Secrets

@@ -2,7 +2,7 @@
 
 One default stack for all three projects. Use it unless you have a reason you can write down in an issue.
 
-Every limit and price on this page was checked on Sep 24, 2026 against the linked official page. They change. Hamza re-checks before M2. If you rely on a number, open the link yourself and log it ([VERIFY.md](VERIFY.md)).
+Every limit and price on this page was checked on Sep 24, 2026 against the linked official page. They change. Hamza re-checks before M2. If you rely on a number, open the link yourself.
 
 ## The default
 
@@ -21,7 +21,7 @@ Every limit and price on this page was checked on Sep 24, 2026 against the linke
 npx create-next-app@latest web
 ```
 
-Docs, data and logs stay outside `web/`. On Vercel, set the project's **Root Directory** to `web`.
+Docs, data, notes and logs stay outside `web/`. On Vercel, set the project's **Root Directory** to `web`.
 
 ---
 
@@ -94,7 +94,7 @@ rollback;
 
 You want `new row violates row-level security policy for table "leads"`. If the insert succeeds, your policy doesn't enforce what you think. The `rollback` throws the test row away either way.
 
-"Claude says the policy blocks bad zips" is tier 4. Running this and watching it fail is tier 1.
+"Claude says the policy blocks bad zips" proves nothing. Running this and watching it fail does.
 
 ### Keys and secrets
 

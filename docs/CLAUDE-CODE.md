@@ -2,7 +2,7 @@
 
 Claude Code is Claude with a terminal, your files and git. It reads, writes and runs things on your machine. That makes it fast. It also means it can be wrong on your disk, not just in a chat window.
 
-Install and login are in [SETUP.md](SETUP.md). This page is how to use it without wasting your week or your usage limit.
+Install and login are in [SETUP.md](SETUP.md). This page is the reference: commands, modes, limits. How to actually work with it is in [WORKING-WITH-CLAUDE.md](WORKING-WITH-CLAUDE.md). Read that first.
 
 Full docs: https://code.claude.com/docs
 
@@ -72,7 +72,7 @@ For anything bigger than a one-line fix:
 5. **Reject or edit it** if it's wrong. Rejecting a plan is much cheaper than reviewing the diff of a wrong one.
 6. **Approve,** then watch.
 7. **Read every diff** before you commit.
-8. **Run it.** Reading is not running ([VERIFY.md](VERIFY.md)).
+8. **Run it.** Reading is not running ([WORKING-WITH-CLAUDE.md](WORKING-WITH-CLAUDE.md)).
 9. **Commit** with a message that says what changed.
 
 Scope down, not up. "Build the booking system" gets you something shaped like a booking system. "Add a zip check constraint to `bookings` and a test that inserts 99999 as anon" gets you something you can check.
@@ -133,7 +133,7 @@ Every one of you hit the limit in Week 1. Here's how it works and how to make it
 | Check `/usage` and `/context` | Know where you are before a long task, not after |
 | Plan your week | Don't save all the Claude work for the night before a deadline |
 
-When you hit the limit: the message says when it resets. Use the gap to read diffs, test by hand and update your verification log. That work doesn't need Claude.
+When you hit the limit: the message says when it resets. Use the gap to read diffs, test by hand and update your notes. That work doesn't need Claude.
 
 ## 8. Headless: `claude -p` (Project C)
 
@@ -186,4 +186,4 @@ Sources: https://code.claude.com/docs/en/headless · https://code.claude.com/doc
 
 Two things:
 1. One plan you rejected or edited, and why. A wrong plan teaches you more about your own brief than a right one.
-2. One row from your verification log where Claude was wrong, and how you caught it.
+2. One time Claude was wrong, and how you caught it.

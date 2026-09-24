@@ -6,11 +6,11 @@ Closes #<issue number>
 
 ## How I verified it
 
-<!-- What you ran and what you saw. Name the tier. Tier 3 or 4 is allowed if you say so. -->
+<!-- What you ran and what you saw. If you didn't run something, say so. -->
 
 - **What I ran:**
 - **What I saw:**
-- **Tier:** <1 = I ran it and watched the result · 2 = I watched a recording of it running · 3 = I read it carefully and it looks right · 4 = it told me it works>
+- **Not checked:**
 
 ## Screenshots
 
@@ -25,5 +25,5 @@ Closes #<issue number>
 - [ ] I ran it locally
 - [ ] I read every line of the diff
 - [ ] No secrets, no `.env` files, no keys in the diff
-- [ ] Every claim in this PR has a row in my `logs/<name>.md`
+- [ ] Every number or fact in this PR cites its source (file and row, or URL)
 - [ ] Reviewer: I ran it too, not just read it
