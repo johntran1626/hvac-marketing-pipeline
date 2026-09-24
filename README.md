@@ -2,6 +2,8 @@
 
 **Zapp AI Agent Lab, Fall 2026.** A group project. It runs from Sep 24 to Oct 22.
 
+New here? Start with [docs/SETUP.md](docs/SETUP.md).
+
 | | What | Due |
 |---|---|---|
 | **Setup** | Everyone's accounts and tools, and a hello URL deployed. See [docs/SETUP.md](docs/SETUP.md) | Sun Sep 27, 11:59pm CT |

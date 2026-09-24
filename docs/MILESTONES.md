@@ -58,7 +58,7 @@ Checked per person. A group can pass while one member misses these. That miss is
 
 ### Project C: prospect research agent
 
-- [ ] The read answers **"Which 10 should Zapp call first, and why?"**, 400 words or fewer. **Every claim is tied to a URL** in the logs.
+- [ ] The read answers **"Which 10 should Lantern Local call first, and why?"**, 400 words or fewer. **Every claim is tied to a URL** in the logs.
 - [ ] The **schema**, as SQL committed to the repo.
 
 ---
