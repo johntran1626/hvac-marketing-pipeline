@@ -1,0 +1,23 @@
+# dependencies and builds
+node_modules/
+.next/
+out/
+.vercel/
+
+# secrets: never commit these
+.env
+.env*.local
+.env.*
+!.env.example
+
+# local and OS files
+.DS_Store
+Thumbs.db
+*.sqlite
+cache/
+
+# python (if your worker or pipeline uses it)
+__pycache__/
+*.pyc
+.venv/
+venv/
