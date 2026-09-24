@@ -140,25 +140,27 @@ When you hit the limit: the message says when it resets. Use the gap to read dif
 `claude -p` runs one prompt with no chat and prints the answer. You can script it.
 
 ```bash
-claude -p "<prompt>" --output-format json --model sonnet --allowedTools "WebFetch"
+claude -p "<prompt>" --output-format json --model sonnet --allowedTools "WebFetch" --strict-mcp-config
 ```
 
 - `--output-format json` wraps the answer in JSON. The answer text is in the `result` field. Open one output and look before you write the parser.
 - `--model sonnet`: always, for batch work.
 - `--allowedTools`: only the tools the job needs. `-p` runs start in Manual mode, and with nobody there to answer, anything not allowed is refused.
 - `-p` loads your project's `CLAUDE.md`, so your rules apply to scripted runs too.
+- **Always add `--strict-mcp-config`.** Without it, `-p` also loads every MCP server and every claude.ai connector on your account (Gmail, Drive, and so on), even when you limit `--tools`. We tested it: 49 extra tools, including ones that can send email and share files, sitting next to web pages written by strangers, plus about 25,000 extra tokens on every call. With the flag: zero.
+- **WebFetch hands the model a summary of the page, not the page.** Summaries can invent details (in testing it made up an email address and cited the contact page for it). For any fact you will cite, fetch the raw page yourself and quote it.
 - **Don't add `--bare`.** Bare mode skips your subscription login and needs an API key.
 
 Save one result per business:
 
 **macOS:**
 ```bash
-claude -p "<prompt>" --output-format json --model sonnet --allowedTools "WebFetch" > out/b001.json
+claude -p "<prompt>" --output-format json --model sonnet --allowedTools "WebFetch" --strict-mcp-config > out/b001.json
 ```
 
 **Windows PowerShell:**
 ```powershell
-claude -p "<prompt>" --output-format json --model sonnet --allowedTools "WebFetch" | Out-File -Encoding utf8 out\b001.json
+claude -p "<prompt>" --output-format json --model sonnet --allowedTools "WebFetch" --strict-mcp-config | Out-File -Encoding utf8 out\b001.json
 ```
 
 **The rules:**
