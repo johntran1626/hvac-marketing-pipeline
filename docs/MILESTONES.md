@@ -55,10 +55,10 @@ Checked per person. A group can pass while one member misses these. That miss is
 - [ ] A **Supabase schema**: a **raw table per source** and a **normalized fact table**, as SQL committed to the repo.
 - [ ] **One source backfilled by hand** from the API into its raw table. Evidence: a query showing its row count and date range.
 
-### Project C: prospect research agent
+### Project C: event vendor research agent
 
-- [ ] The read answers **"Which 10 should Lantern Local call first, and why?"**, 400 words or fewer. **Every claim cites its URL.**
-- [ ] The **schema**, as SQL committed to the repo.
+- [ ] The read answers **"Which 3 venues, 3 caterers and 3 rental companies should Cattail & Rye call for the Northline holiday party, and which look good but aren't?"**, 400 words or fewer. **Every claim cites its sandbox URL.**
+- [ ] The **schema**, as SQL committed to the repo: vendors, facts with their sources, availability, briefs, scores, drafts and runs.
 
 ---
 
@@ -81,11 +81,12 @@ Checked per person. A group can pass while one member misses these. That miss is
 - [ ] An **incremental CRM sync.**
 - [ ] The **dashboard**: true CPL by channel and month, reported vs unique leads, brand vs non-brand, and a **freshness badge**.
 
-### Project C: prospect research agent
+### Project C: event vendor research agent
 
-- [ ] The **full run**: every business in `data/prospects.csv`, results in Supabase.
-- [ ] A **UI** with the ranked list, facts with their source URLs, and **conflicts and unknowns visible**.
-- [ ] **Email drafts**, each citing 2 or more verified specifics.
+- [ ] The **full run**: every vendor in `data/vendors.csv`, scored against both briefs in `data/briefs/`, results in Supabase, each tagged with a run id.
+- [ ] A **UI** with, for each brief, the shortlist by category, each fact with its source URL, the label and the rubric points behind it, and **conflicts and unknowns visible**.
+- [ ] **Inquiry email drafts** for every shortlisted vendor, each citing 2 or more verified specifics with their sources.
+- [ ] **Scoring is plain code that reads a brief file.** A new brief JSON in the same format needs no code change.
 - [ ] The LLM step runs **locally** with `claude -p` on your own Pro plan. The deployed app only displays results. No API keys.
 
 ---
@@ -109,10 +110,10 @@ Checked per person. A group can pass while one member misses these. That miss is
 - [ ] A **data-quality eval of 8 or more checks**, including should-flag cases for: a restated day, a duplicate caller, a time-zone boundary, and each data problem your read and pipeline found.
 - [ ] An **anomaly alert**, shown firing on a real anomaly in the data.
 
-### Project C: prospect research agent
+### Project C: event vendor research agent
 
-- [ ] An **eval harness on `evals/public.jsonl`**: field accuracy, should-flag traps, label agreement, and a **fabrication check on the emails**.
-- [ ] The harness **takes the eval file as an input**. Hamza runs it on a hidden set in the same format, so don't tune to the public 20.
+- [ ] An **eval harness on `evals/public.jsonl`**: field accuracy, should-flag cases, label agreement for each brief, and a **fabrication check on the emails**.
+- [ ] The harness **takes the eval file and a folder of briefs as inputs** and runs with one command. Hamza runs it on a hidden set with a hidden brief, so don't tune to the public 24.
 
 ---
 

@@ -5,7 +5,7 @@ HOW TO USE THIS TEMPLATE (delete this block before you submit)
 
 - Limit: 400 words. Count them with a tool. Don't estimate.
 - The four headers are the questions from your README, copied word for word.
-  Project C: your README asks one question, "Which 10 should Lantern Local call first, and why?"
+  Project C: your README asks one question, "Which 3 venues, 3 caterers and 3 rental companies should Cattail & Rye call for the Northline holiday party, and which look good but aren't?"
   Use the parts your README breaks it into as the headers.
 - Write for the person who asked. Plain words, no jargon they'd have to look up.
 - Every number, name, date and quote cites its source: file and row, or URL.

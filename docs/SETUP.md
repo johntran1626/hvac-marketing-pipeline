@@ -25,7 +25,7 @@ Most of this is installs and waiting. Do it in order.
 ## 1. GitHub
 
 1. Sign up at https://github.com/signup. Pick a username you'd put on a resume.
-2. **Reply to Hamza's email with your username now.** Don't wait for the rest. He invites you to your project's private starter repo.
+2. **Reply to Hamza's email with your username now.** Don't wait for the rest. Groups and projects go out by Sunday night, with an invite to your project's private starter repo.
 3. When the invite arrives, accept it. Your group forks that repo. See [WORKFLOW.md](WORKFLOW.md).
 
 ## 2. Git
