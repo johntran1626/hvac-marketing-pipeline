@@ -8,11 +8,12 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 - Add rows only at the bottom of **your own section**, so two people never edit the same lines.
 - Honest numbers only. Zero is an honest number. A week of identical round numbers isn't.
 
-## <name 1>
+## John Tran
 
 | Date | Hours | What I did | Issue / PR |
 |---|---|---|---|
-| 2026-09-28 | 1.5 | Forked the starter repo, invited the group, enabled Actions | #1 |
+| 2026-09-30 | 1.0 | Forked the starter repo, set up M1 milestone and issues, assigned owners, created the Supabase project | #9 |
+| 2026-10-01 | 2.0 | Read the brief, invited the team to Supabase, mapped Diane's questions to the snapshot data, opened and merged my first PR | #1, #9, #13 |
 
 ## <name 2>
 
