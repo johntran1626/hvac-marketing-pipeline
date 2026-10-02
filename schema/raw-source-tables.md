@@ -68,7 +68,7 @@ Source semantics:
 - `date_start` and `date_stop` are the same source day.
 - `account_id`, `campaign_id`, and `adset_id` are source identifiers.
 - `spend` is reported in dollars.
-- `leads` is the number of leads reported by Meta.
+- `actions` stores the raw Meta actions array exactly as received from the API.
 
 ### Table: `raw_meta_insights`
 
@@ -81,10 +81,10 @@ Source semantics:
 | campaign_name | text | no | Campaign name |
 | adset_id | text | no | Source ad set identifier |
 | adset_name | text | no | Ad set name |
-| impressions | bigint | no | Number of impressions |
-| clicks | bigint | no | Number of clicks |
-| spend | numeric | no | Reported spend in dollars |
-| leads | bigint | no | Leads reported by Meta |
+| impressions | text | no | Raw impressions value as received from the API |
+| clicks | text | no | Raw clicks value as received from the API |
+| spend | text | no | Raw spend value as received from the API |
+| actions | jsonb | no | Raw Meta actions array as received from the API |
 
 ### Key
 
