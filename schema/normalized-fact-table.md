@@ -15,6 +15,8 @@ It is designed to support the Project B dashboard requirements, including:
 
 Raw source data remains unchanged in the raw tables. Source-specific fields are standardized only in this normalized analytical layer.
 
+For Meta Ads, raw `impressions`, `clicks`, and `spend` values arrive as strings and are converted to numeric types during normalization; lead counts are extracted from the raw `actions` array.
+
 ## Grain
 
 One row represents one unique combination of:
@@ -125,7 +127,7 @@ The normalized table keeps platform-reported leads separate from independently o
 Examples include:
 
 - Google Ads `conversions`
-- Meta Ads `leads`
+- Meta Ads `actions` entries where `action_type = "lead"`; normalize the string `value` to numeric
 
 Platform-reported leads may be fractional when the source platform reports fractional attribution.
 
