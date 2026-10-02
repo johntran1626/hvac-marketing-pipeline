@@ -29,17 +29,17 @@ For sources that do not have a meaningful campaign identifier, `campaign_id` and
 
 ## Analysis Date
 
-`analysis_date` uses the Central Time calendar date (`America/Chicago`) as the common reporting date across sources.
+`analysis_date` is the daily reporting bucket used to place the sources side by side. Timestamped sources are normalized to the Central Time business day (`America/Chicago`). Platform data that arrives only as an already-aggregated account-local date keeps that source date because there is no event timestamp available to re-bucket without inventing timing.
 
 Source dates and timestamps are normalized as follows:
 
-- Google Ads: use `date` directly because it is already reported in Central Time.
-- Meta Ads: convert the Pacific Time account day to the corresponding Central Time analysis date.
-- Local Services Ads: convert `lead_created_at` from UTC to Central Time and use its Central calendar date.
+- Google Ads: use `date` directly because it is already the Central Time account day.
+- Meta Ads: use `date_start` directly. Meta returns a daily aggregate for the Pacific Time account day (`America/Los_Angeles`), not event timestamps. Do not shift the date into Central Time or split the row across Central days; that would invent detail the source does not provide.
+- Local Services Ads: convert `lead_created_at` from UTC to Central Time and use its Central calendar date. A later credit does not move the lead to the `credited_at` date.
 - Calls: convert `started_at` from UTC to Central Time and use its Central calendar date.
 - CRM Jobs: use the Central Time calendar date from `created_at`.
 
-The original source timestamps and dates remain preserved in the raw tables.
+The original source timestamps and dates remain preserved in the raw tables, so the dashboard can disclose that Meta's daily bucket is Pacific-account-day data.
 
 ## Dimensions and Source Identifiers
 
@@ -107,14 +107,17 @@ Expected values are:
 - `non_brand`
 - `not_applicable`
 
-Classification rules for the current snapshot are:
+Classification rules for the current snapshot use `source_platform + campaign_id`, not campaign-name text:
 
-- Google Ads campaign `Brand - Wren Air & Heat` → `brand`
-- all other current Google Ads campaigns → `non_brand`
-- current Meta campaigns → `non_brand`
+- Google Ads `20814455901` (`Brand - Wren Air & Heat`) → `brand`
+- Google Ads `20814455917` → `non_brand`
+- Google Ads `20814455930` → `non_brand`
+- Google Ads `20814455948` → `non_brand`
+- Meta `120208841937650100` → `non_brand`
+- Meta `120208841937650200` → `non_brand`
 - rows without meaningful campaign or brand context → `not_applicable`
 
-Brand classification is derived during normalization. Raw campaign names remain unchanged in the source tables.
+Campaign IDs are the classifier because names can change over time. In the snapshot, Google campaign ID `20814455917` appears under both `AC Repair - Houston` and `Summer AC Repair`, so name matching would be less stable. Raw campaign names remain unchanged for display and auditability.
 
 ## Lead Definitions
 
@@ -128,8 +131,19 @@ Examples include:
 
 - Google Ads `conversions`
 - Meta Ads `actions` entries where `action_type = "lead"`; normalize the string `value` to numeric
+- Local Services Ads: one reported lead per raw LSA lead row. A row that later becomes `CREDITED` remains a platform-reported lead; the credit changes its billable spend, not the fact that the platform reported a lead.
 
 Platform-reported leads may be fractional when the source platform reports fractional attribution.
+
+### LSA Credits and Net Spend
+
+LSA `spend_usd` must reflect the lead's current billing state, not blindly sum `cost_usd`:
+
+- `CHARGED` → use `cost_usd`
+- `CREDITED` → `0` net spend because the charge was refunded
+- `NOT_CHARGED` → `0` spend
+
+Credits can arrive after the original lead. When a lead changes from `CHARGED` to `CREDITED`, normalization updates the spend on the lead's original `analysis_date` derived from `lead_created_at`; it does not create new spend or a new lead on the `credited_at` date.
 
 ### Unique Leads
 
@@ -157,7 +171,7 @@ The fact table stores the underlying spend and lead counts rather than storing a
 
 | Column | PostgreSQL type | Nullable | Purpose |
 |---|---|---|---|
-| analysis_date | date | no | Common Central Time reporting date |
+| analysis_date | date | no | Daily reporting bucket; Central business date for timestamped sources, Meta Pacific account date for Meta daily aggregates |
 | channel | text | no | Business-facing acquisition channel |
 | source_platform | text | no | System that produced the underlying data |
 | source_account_id | text | yes | Platform-specific account identifier |
