@@ -4,7 +4,7 @@
 
 ## 1. What is actually driving the phones?
 
-The phone log shows that paid-platform “leads” are not the same thing as real callers. In the latest 30 days, using a real lead as a unique first-time caller with a call of at least 30 seconds, Google Ads produced 100, LSA 68, and Meta 6. Their observed costs per real lead were $89.54, $45.22, and $227.28 respectively. (`scripts/check_m1_memo.py`, §§11–12)
+The phone log shows that paid-platform “leads” are not the same thing as real callers. In the latest 30 days, using a real lead as a unique first-time caller with a call of at least 30 seconds, Google Ads produced 100, LSA 68, and Meta 6. Their observed costs per real lead were $89.54, $45.22, and $227.28 respectively. The free Google Business Profile listing produced the most: 126. Brand's summer $8.44 per reported conversion is $72.59 per real lead. (`scripts/check_m1_memo.py`, §§11–12, 16)
 
 ## 2. What would you do in the next 30 days on the current budget?
 
@@ -20,4 +20,4 @@ Check blended paid cost per real lead after the first 30 full days of the new mi
 
 ---
 
-**Sources:** `scripts/check_m1_memo.py` §§3, 5, 10–15 · `notes/data-map.md` · `data/snapshot-2026-09-23/*.csv` · `README.md`
+**Sources:** `scripts/check_m1_memo.py` §§3, 5, 10–16 · `notes/data-map.md` · `data/snapshot-2026-09-23/*.csv` · `README.md`
