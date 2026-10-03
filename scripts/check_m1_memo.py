@@ -291,3 +291,34 @@ print(f"  current observed blended CPL=${current_cpl:.2f}")
 print(f"  modeled blended CPL=${projected_cpl:.2f}")
 print(f"  modeled improvement={(1 - projected_cpl/current_cpl) * 100:.1f}%")
 print("  NOTE: scenario assumes recent observed CPLs hold after reallocation; it is not a forecast guarantee.")
+
+
+section("16. Brand campaign, summer 2026: Diane's reported cost vs cost per real lead")
+BRAND = "20814455901"
+summer_start, summer_end = (date.fromisoformat(x) for x in SUMMER)
+brand_spend = sum(
+    int(r["cost_micros"]) / 1_000_000
+    for r in g
+    if r["campaign_id"] == BRAND and SUMMER[0] <= r["date"] <= SUMMER[1]
+)
+brand_conv = sum(
+    float(r["conversions"])
+    for r in g
+    if r["campaign_id"] == BRAND and SUMMER[0] <= r["date"] <= SUMMER[1]
+)
+brand_callers = set()
+for r in calls:
+    if r["source"] != "google_ads" or r["campaign_id"] != BRAND:
+        continue
+    d = datetime.fromisoformat(
+        r["started_at"].replace("Z", "+00:00")
+    ).astimezone(CENTRAL).date()
+    if not (summer_start <= d <= summer_end):
+        continue
+    if r["first_time_caller"].lower() != "true":
+        continue
+    if int(r["duration_sec"]) < 30:
+        continue
+    brand_callers.add(r["caller_hash"])
+print(f"  spend=${brand_spend:,.2f} reported_conversions={brand_conv:.1f} cost/conv=${brand_spend/brand_conv:.2f}")
+print(f"  real_leads={len(brand_callers)} cost/real_lead=${brand_spend/len(brand_callers):.2f}")
