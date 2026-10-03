@@ -24,6 +24,7 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-09-29 | 0.5 | Team coordination and project workflow planning | M1 planning |
 | 2026-09-30 | 3.5 | Team planning, repo and issue setup, Supabase setup, web scaffold, and raw schema work | #5, #9, #10 |
 | 2026-10-01 | 3.0 | Raw and normalized schema work, PR review fixes, Git branch cleanup, and Supabase/project coordination | #5, #6, #9, #10 |
+| 2026-10-03 | 0.5 | Attended team check-in meeting and reviewed/approved assigned PRs | #21, #22 |
 
 ## <name 3>
 
