@@ -25,6 +25,7 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-09-30 | 3.5 | Team planning, repo and issue setup, Supabase setup, web scaffold, and raw schema work | #5, #9, #10 |
 | 2026-10-01 | 3.0 | Raw and normalized schema work, PR review fixes, Git branch cleanup, and Supabase/project coordination | #5, #6, #9, #10 |
 | 2026-10-03 | 0.5 | Attended team check-in meeting and reviewed/approved assigned PRs | #21, #22 |
+| 2026-10-03 | 0.5 | Project risk audit, unmerged contingency backups for #2/#4, final #10 verification/closeout, and project documentation. Backup work was risk mitigation only and does not claim ownership of teammates' assigned deliverables. | #2, #4, #10 |
 
 ## <name 3>
 
