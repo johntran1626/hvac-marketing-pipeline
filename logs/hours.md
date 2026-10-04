@@ -35,9 +35,3 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-02 | 2.0 | Read the brief, milestones, data map and team notes; caught up on the issues and open PRs to plan my part; team check-in meeting | #2, #4 |
 | 2026-10-03 | 2.0 | Verified M1 evidence: ran the LSA backfill, fact table and constraint queries in Supabase, tested the live site and /health in a private window, set up the repo and Python locally, ran both memo scripts plus a Heating Repair month-by-month check, reviewed and approved 5 PRs | #4, #13, #19, #20, #21, #22 |
 | 2026-10-03 | 1.0 | Wrote the memo verification note and Heating Repair script, posted evidence on #2 and #4, logged hours, opened this PR | #2, #4 |
-
-## <name 4>
-
-| Date | Hours | What I did | Issue / PR |
-|---|---|---|---|
-| | | | |
