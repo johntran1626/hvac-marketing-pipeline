@@ -1,0 +1,28 @@
+"""Run the worker.
+
+From the repo root:
+  python3 -m worker.run              # every source
+  python3 -m worker.run lsa          # one source
+"""
+import sys
+
+from worker import sync
+from worker.api_client import ApiClient
+from worker.config import load_env
+from worker.db import Db
+from worker.sources import SOURCES
+
+
+def main(names):
+    env = load_env()
+    api = ApiClient(env["LAB_API_KEY"])
+    db = Db(env["SUPABASE_URL"], env["SUPABASE_SECRET_KEY"])
+    unknown = [n for n in names if n not in SOURCES]
+    if unknown:
+        raise SystemExit(f"Unknown source {unknown}. Choose from {list(SOURCES)}")
+    for name in names or SOURCES:
+        sync.run(api, db, SOURCES[name])
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

@@ -34,7 +34,7 @@ Also:
 - Dev server: `cd web && npm run dev`, then http://localhost:3000
 - Build (run before every PR): `cd web && npm run build`
 - Lint: `cd web && npm run lint`
-- Worker, locally: `<command>`
+- Worker, locally: `python3 -m worker.run` (or `python3 -m worker.run lsa`). Tests: `python3 -m unittest discover -s worker/tests -t .`
 - Data-quality eval: `<command>`
 - Supabase CLI: `npx supabase <command>` (never `npm i -g supabase`)
 - App env vars (`web/.env.local`): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`

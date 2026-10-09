@@ -21,7 +21,9 @@ For Meta Ads, raw `impressions`, `clicks`, and `spend` values arrive as strings 
 
 One row represents one unique combination of:
 
-`analysis_date + channel + campaign_id + brand_classification`
+`analysis_date + channel + source_platform + source_account_id + campaign_id + brand_classification`
+
+Each source writes its own rows (for example `lsa` rows carry spend and reported leads, `call_tracking` rows carry calls and unique leads, `crm` rows carry jobs and revenue), so two sources never share or overwrite one row. The dashboard sums each metric by channel, month, campaign, and brand classification. Metrics stay separate: unique leads come only from call tracking, and CRM jobs are never added to lead counts.
 
 This grain supports daily analysis while allowing the dashboard to aggregate results by month, channel, campaign, and brand classification.
 
