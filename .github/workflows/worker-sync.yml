@@ -1,0 +1,31 @@
+# Issue #32: run the worker on GitHub Actions, daily and by hand.
+# Schedules are UTC and only run from main. 11:23 UTC is 6:23am Central (5:23am in winter).
+name: worker-sync
+
+on:
+  schedule:
+    - cron: "23 11 * * *"  # not :00, busy minutes get delayed or dropped
+  workflow_dispatch: {}    # "Run workflow" button on the Actions tab
+
+# Never run two syncs at once: they would fight over sync_state.
+concurrency:
+  group: worker-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Worker tests
+        run: python -m unittest discover -s worker/tests -t .
+      - name: Sync every source (backfill what's missing, refresh recent days)
+        run: python -m worker.run
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          LAB_API_KEY: ${{ secrets.LAB_API_KEY }}
