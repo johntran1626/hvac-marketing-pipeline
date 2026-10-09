@@ -4,6 +4,7 @@ From the repo root:
   python3 -m worker.run              # every source
   python3 -m worker.run lsa          # one source
 """
+import signal
 import sys
 
 from worker import sync
@@ -13,7 +14,14 @@ from worker.db import Db
 from worker.sources import SOURCES
 
 
+def stop(signum, frame):
+    # GitHub Actions (and `kill`) stop a job with SIGTERM. Turn it into an exception so
+    # sync.run records the run as failed; progress already saved stays saved.
+    raise SystemExit(f"stopped by signal {signum}")
+
+
 def main(names):
+    signal.signal(signal.SIGTERM, stop)
     env = load_env()
     api = ApiClient(env["LAB_API_KEY"])
     db = Db(env["SUPABASE_URL"], env["SUPABASE_SECRET_KEY"])
