@@ -34,6 +34,9 @@ def main(names):
             src.run(api, db)  # incremental sources (CRM) run their own loop
         else:
             sync.run(api, db, src)
+    # Rebuild the dashboard's fact table from the raw tables (all or nothing, in one database call).
+    for row in db.rpc("rebuild_fact_marketing_daily"):
+        print(f"[fact] {row['source_platform']}: {row['fact_rows']} rows")
 
 
 if __name__ == "__main__":
