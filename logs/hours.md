@@ -42,3 +42,5 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-09 | 1.5 | Read docs/API.md and John's worker scaffold (#43); wrote API client tests (paging, 429, 503, give-up, windows, cursor, no secrets in logs); found and fixed a crash on non-integer Retry-After in worker/http.py | #36 |
 | 2026-10-09 | 1.0 | Reviewed and approved #43: ran worker tests, checked sync_state, fact grain and RLS in Supabase | #43 |
 | 2026-10-10 | 2.0 | Reviewed and approved #46 (ran the worker locally, checked sync_state); built the calls loader and tests, loaded 30,554 calls, ran the evidence queries (match the snapshot exactly) | #46, #37 |
+| 2026-10-10 | 2.0 | Set up the GitHub Actions secrets and ran the worker locally; agreed the unique-lead rule and lead summing with the team; planned the fact table rebuild and dashboard | #32, #31, #33 |
+| 2026-10-11 | 3.0 | Reviewed and merged the M2 PRs (#43 to #51); built the Meta loader, fact table rebuild and dashboard (#52); ran the migrations, set the Vercel env vars, ran the sync workflow; moved the daily sync to the evening (#53); audited M2 and closed the finished issues | #27, #30, #32, #33, #34, #35 |
