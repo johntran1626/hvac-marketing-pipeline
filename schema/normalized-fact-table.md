@@ -153,7 +153,9 @@ Credits can arrive after the original lead. When a lead changes from `CHARGED` t
 
 A call counts as a unique lead when:
 
-`first_time_caller = true`
+`first_time_caller = true AND duration_sec >= 30`
+
+This is the M2 definition the team agreed on (#31), the same one the M1 memo used. Calls shorter than 30 seconds (hang-ups, wrong numbers, spam) are not leads. In the 2026-09-23 snapshot that is 6,774 unique leads, against 8,572 first-time callers of any length. Calls are bucketed by the Central date of `started_at`.
 
 The stable `caller_hash` field allows repeated calls from the same anonymized phone number to be distinguished from first-time callers.
 

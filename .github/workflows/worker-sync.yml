@@ -1,10 +1,11 @@
 # Issue #32: run the worker on GitHub Actions, daily and by hand.
-# Schedules are UTC and only run from main. 11:23 UTC is 6:23am Central (5:23am in winter).
+# Schedules are UTC and only run from main. 00:47 UTC is 7:47pm Central (6:47pm in winter).
+# Yesterday's data is available after midnight Central, so an evening run always has it.
 name: worker-sync
 
 on:
   schedule:
-    - cron: "23 11 * * *"  # not :00, busy minutes get delayed or dropped
+    - cron: "47 0 * * *"  # not :00, busy minutes get delayed or dropped
   workflow_dispatch: {}    # "Run workflow" button on the Actions tab
 
 # Never run two syncs at once: they would fight over sync_state.
