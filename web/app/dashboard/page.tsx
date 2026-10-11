@@ -21,6 +21,10 @@ const usd = (n: number | null) =>
 const usd2 = (n: number | null) =>
   n === null ? "–" : n.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 });
 const num = (n: number) => Math.round(n).toLocaleString("en-US");
+const lastDayOf = (m: string) => {
+  const [y, mo] = m.split("-").map(Number);
+  return String(new Date(Date.UTC(y, mo, 0)).getUTCDate());
+};
 const monthLabel = (m: string) =>
   new Date(`${m}-15T12:00:00Z`).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
 
@@ -74,7 +78,7 @@ function Table({ head, rows }: { head: string[]; rows: (string | number)[][] }) 
         <thead>
           <tr className="border-b border-zinc-300 text-left dark:border-zinc-700">
             {head.map((h, i) => (
-              <th key={h} className={`py-2 pr-4 font-semibold ${i > 0 ? "text-right" : ""}`}>
+              <th key={i} className={`py-2 pr-4 font-semibold ${i > 0 ? "text-right" : ""}`}>
                 {h}
               </th>
             ))}
@@ -116,6 +120,10 @@ export default async function Dashboard() {
   }
 
   const months = lastMonths(rows, MONTHS);
+  const first = months[0], last = months.at(-1)!;
+  // The newest month is usually partway through; say so next to its numbers.
+  const latestDay = rows.map((r) => r.analysis_date).sort().at(-1)!;
+  const label = (m: string) => (m === last && latestDay !== `${m}-${lastDayOf(m).padStart(2, "0")}` ? `${monthLabel(m)} (so far)` : monthLabel(m));
   const recent = rows.filter((r) => months.includes(month(r)));
   const byMonthChannel = sumBy(recent, (r) => `${month(r)}|${r.channel}`);
   const get = (m: string, c: string): Totals =>
@@ -123,7 +131,7 @@ export default async function Dashboard() {
 
   // 1. Cost per lead by channel and month (paid channels).
   const cplRows = months.map((m) => [
-    monthLabel(m),
+    label(m),
     ...PAID_CHANNELS.flatMap((c) => {
       const t = get(m, c);
       return [usd(t.spend), num(t.unique), usd2(costPerLead(t))];
@@ -143,8 +151,8 @@ export default async function Dashboard() {
         num(t.unique),
         paid && t.unique > 0 ? `${(t.reported / t.unique).toFixed(1)}×` : "–",
         num(t.calls),
-        paid ? usd(t.spend) : "$0",
-        usd2(costPerLead(t)),
+        paid ? usd(t.spend) : "free",
+        paid ? usd2(costPerLead(t)) : "free",
       ];
     });
 
@@ -155,14 +163,13 @@ export default async function Dashboard() {
   );
   const b = (m: string, k: string) => brand.get(`${m}|${k}`) ?? { spend: 0, reported: 0, unique: 0, calls: 0 };
   const brandRows = months.map((m) => [
-    monthLabel(m),
+    label(m),
     ...["brand", "non_brand"].flatMap((k) => {
       const t = b(m, k);
       return [usd(t.spend), num(t.reported), num(t.unique), usd2(costPerLead(t))];
     }),
   ]);
 
-  const first = months[0], last = months.at(-1)!;
 
   return (
     <main className="mx-auto w-full max-w-6xl space-y-10 px-4 py-8 sm:px-8">
