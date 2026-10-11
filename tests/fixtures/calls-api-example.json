@@ -1,0 +1,20 @@
+{
+  "scope": "Documented illustrative API example; synthetic variations in tests are not live evidence.",
+  "response": {
+    "data": [
+      {
+        "call_id": "call_0003685",
+        "started_at": "2026-09-20T21:45:58Z",
+        "duration_sec": 720,
+        "tracking_number": "(713) 555-0115",
+        "source": "google_ads",
+        "campaign_id": "20114567803",
+        "caller_hash": "695240ed4c93",
+        "first_time_caller": true
+      }
+    ],
+    "paging": {
+      "next_cursor": null
+    }
+  }
+}
