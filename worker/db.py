@@ -21,3 +21,8 @@ class Db:
         q = urllib.parse.urlencode({"select": "*", **filters})
         body, _ = send(f"{self.base}/{table}?{q}", self.headers)
         return body
+
+    def rpc(self, function):
+        """Call a Postgres function, e.g. rebuild_fact_marketing_daily."""
+        body, _ = send(f"{self.base}/rpc/{function}", self.headers, body={}, method="POST")
+        return body
