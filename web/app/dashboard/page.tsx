@@ -174,7 +174,7 @@ export default async function Dashboard() {
   return (
     <main className="mx-auto w-full max-w-6xl space-y-10 px-4 py-8 sm:px-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold">Wren Air &amp; Heat: marketing dashboard</h1>
+        <h1 className="text-3xl font-semibold">Wren Air &amp; Heat: Marketing Dashboard</h1>
         <p className="max-w-3xl text-zinc-600 dark:text-zinc-400">
           {monthLabel(first)} to {monthLabel(last)}. A <strong>unique lead</strong> is a first-time caller who stayed on
           the line 30 seconds or more. <strong>Cost per lead</strong> is spend ÷ unique leads. Every number is summed from{" "}
