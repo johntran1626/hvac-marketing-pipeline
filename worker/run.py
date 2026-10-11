@@ -29,7 +29,11 @@ def main(names):
     if unknown:
         raise SystemExit(f"Unknown source {unknown}. Choose from {list(SOURCES)}")
     for name in names or SOURCES:
-        sync.run(api, db, SOURCES[name])
+        src = SOURCES[name]
+        if hasattr(src, "run"):
+            src.run(api, db)  # incremental sources (CRM) run their own loop
+        else:
+            sync.run(api, db, src)
 
 
 if __name__ == "__main__":
