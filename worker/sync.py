@@ -1,4 +1,8 @@
-"""Resumable sync for date-window sources (Google Ads, Meta, LSA, calls).
+"""Dispatch paid sources to the fenced snapshot protocol; resume raw Calls.
+
+The legacy paging algorithm below applies only to non-paid sources. Google Ads,
+Meta and LSA use worker.paid_sync and fail closed without an authoritative
+snapshot provider. They never resume a cursor from an earlier generation.
 
 1. Backfill: every 31-day window from the source's first day to the API's data_through.
    After each page is upserted, the window and next_cursor are saved in sync_state.
@@ -23,6 +27,8 @@ class Source:
 
 def load_window(api, db, src, start, end, cursor=None, save_progress=True):
     """Upsert every row in [start, end]. Returns the row count written by this call."""
+    if src.name in {"google_ads", "meta", "lsa"}:
+        raise RuntimeError("Paid sources require the fenced complete-snapshot protocol")
     params = {**src.params, "start_date": start.isoformat(), "end_date": end.isoformat()}
     written = 0
     try:
@@ -39,6 +45,9 @@ def load_window(api, db, src, start, end, cursor=None, save_progress=True):
 
 
 def run(api, db, src):
+    from worker.paid_sync import SOURCE_PLATFORMS, run as paid_run
+    if src.name in SOURCE_PLATFORMS:
+        return paid_run(api, db, src)
     st = state.load(db, src.name)
     last_day = api.data_through()
     state.save(db, src.name, status="running", last_error=None, last_run_started_at=state.now())

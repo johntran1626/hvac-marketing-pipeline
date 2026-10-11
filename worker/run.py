@@ -21,6 +21,7 @@ def stop(signum, frame):
 
 
 def main(names):
+    """Attempt independent sources; return 1 if any ordinary source failure occurs."""
     signal.signal(signal.SIGTERM, stop)
     env = load_env()
     api = ApiClient(env["LAB_API_KEY"])
@@ -28,9 +29,19 @@ def main(names):
     unknown = [n for n in names if n not in SOURCES]
     if unknown:
         raise SystemExit(f"Unknown source {unknown}. Choose from {list(SOURCES)}")
+    failed = False
     for name in names or SOURCES:
-        sync.run(api, db, SOURCES[name])
+        try:
+            sync.run(api, db, SOURCES[name])
+        except Exception:
+            # Never catch cancellation (KeyboardInterrupt/SystemExit). Do not
+            # print exception text: it may contain credentials or source data.
+            failed = True
+            print(f"[{name}] FAILED", flush=True)
+        else:
+            print(f"[{name}] SUCCESS", flush=True)
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    sys.exit(main(sys.argv[1:]))

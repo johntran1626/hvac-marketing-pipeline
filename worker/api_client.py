@@ -20,6 +20,12 @@ class ApiClient:
         self.headers = {"Authorization": f"Bearer {key}"}
         self.pause = pause
 
+    def require_paid_snapshot_support(self, src):
+        from worker.paid_sync import UnsafeSnapshot
+        raise UnsafeSnapshot(
+            "Paid sync blocked: API has no reviewed immutable all-account snapshot "
+            "manifest or revision-bound pagination; raw upsert counts cannot prove completeness")
+
     def data_through(self):
         body, _ = send(f"{API}/v1/health", {})
         return date.fromisoformat(body["data_through"])
