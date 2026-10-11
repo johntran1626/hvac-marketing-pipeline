@@ -1,5 +1,6 @@
 """One HTTP call with retries, shared by the API client and the Supabase client. Standard library only."""
 import json
+import math
 import time
 import urllib.error
 import urllib.request
@@ -12,6 +13,14 @@ class HTTPFailure(Exception):
         super().__init__(f"{where} failed: {status} {body[:200]!r}")
         self.status = status
         self.body = body
+
+
+def retry_after(headers):
+    """Seconds the server asked us to wait, rounded up. Unreadable or missing counts as 0."""
+    try:
+        return max(0, math.ceil(float(headers.get("Retry-After") or 0)))
+    except (TypeError, ValueError, OverflowError):
+        return 0
 
 
 def send(url, headers, body=None, method="GET", sleep=time.sleep):
@@ -31,7 +40,7 @@ def send(url, headers, body=None, method="GET", sleep=time.sleep):
             text = e.read().decode(errors="replace")
             if e.code not in (429, 503) or attempt == MAX_TRIES:
                 raise HTTPFailure(e.code, text, where) from None
-            wait = max(int(e.headers.get("Retry-After") or 0), 2 ** attempt)
+            wait = max(retry_after(e.headers), 2 ** attempt)
             print(f"  {e.code} on {where}, waiting {wait}s (try {attempt}/{MAX_TRIES})")
             sleep(wait)
         except urllib.error.URLError as e:
