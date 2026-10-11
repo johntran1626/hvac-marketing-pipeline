@@ -38,3 +38,7 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-02 | 2.0 | Read the brief, milestones, data map and team notes; caught up on the issues and open PRs to plan my part; team check-in meeting | #2, #4 |
 | 2026-10-03 | 2.0 | Verified M1 evidence: ran the LSA backfill, fact table and constraint queries in Supabase, tested the live site and /health in a private window, set up the repo and Python locally, ran both memo scripts plus a Heating Repair month-by-month check, reviewed and approved 5 PRs | #4, #13, #19, #20, #21, #22 |
 | 2026-10-03 | 1.0 | Wrote the memo verification note and Heating Repair script, posted evidence on #2 and #4, logged hours, opened this PR | #2, #4 |
+| 2026-10-06 | 0.5 | Read Hamza's M1 feedback, the M2 team notes and the M2 GitHub issues; planned my M2 work and order (#36 first, then #37, #29, #34) | #36, #37, #29, #34 |
+| 2026-10-09 | 1.5 | Read docs/API.md and John's worker scaffold (#43); wrote API client tests (paging, 429, 503, give-up, windows, cursor, no secrets in logs); found and fixed a crash on non-integer Retry-After in worker/http.py | #36 |
+| 2026-10-09 | 1.0 | Reviewed and approved #43: ran worker tests, checked sync_state, fact grain and RLS in Supabase | #43 |
+| 2026-10-10 | 2.0 | Reviewed and approved #46 (ran the worker locally, checked sync_state); built the calls loader and tests, loaded 30,554 calls, ran the evidence queries (match the snapshot exactly) | #46, #37 |
