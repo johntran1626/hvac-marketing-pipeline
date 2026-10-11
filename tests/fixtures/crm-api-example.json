@@ -1,0 +1,21 @@
+{
+  "scope": "Documented illustrative API sample; test variations are synthetic, not live evidence.",
+  "response": {
+    "data": [
+      {
+        "job_id": "J002145",
+        "customer_id": "C02261",
+        "created_at": "2026-09-11T15:55:24-05:00",
+        "updated_at": "2026-09-21T19:27:00-05:00",
+        "lead_source": "Google",
+        "job_type": "maintenance",
+        "status": "completed",
+        "revenue_usd": 487.39,
+        "zip": "77020"
+      }
+    ],
+    "paging": {
+      "next_cursor": null
+    }
+  }
+}
