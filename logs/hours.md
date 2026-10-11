@@ -33,6 +33,14 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-03 | 0.5 | Attended team check-in meeting and reviewed/approved assigned PRs | #21, #22 |
 | 2026-10-03 | 0.5 | Project risk audit, unmerged contingency backups for #2/#4, final #10 verification/closeout, and project documentation. Backup work was risk mitigation only and does not claim ownership of teammates' assigned deliverables. | #2, #4, #10 |
 
+| 2026-10-04 | 0.5 | Reviewed M2 priorities, requirements and project status | M2 planning |
+| 2026-10-06 | 0.5 | Prioritized M2 issues and reviewed implementation dependencies | #30, #31, #33 |
+| 2026-10-07 | 1.0 | Reviewed M2 requirements and planned normalization/integration work | #30, #31 |
+| 2026-10-08 | 1.0 | Team check-in, coordination and integration planning | #30, #31, #33 |
+| 2026-10-09 | 0.5 | Reviewed project progress and outstanding requirements | M2 review |
+| 2026-10-10 | 1.5 | Directed and reviewed paid-source persistence and dashboard work; examined tests and integration concerns | #30, #33, PR #50 |
+| 2026-10-11 | 1.5 | Reviewed PR #50 and Calls/CRM integration results, coordinated with team and prepared submission evidence | #30, #31, PR #50 |
+
 ## Ruslan Buhayenko
 
 | Date | Hours | What I did | Issue / PR |
