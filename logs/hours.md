@@ -51,3 +51,4 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-09 | 1.5 | Read docs/API.md and John's worker scaffold (#43); wrote API client tests (paging, 429, 503, give-up, windows, cursor, no secrets in logs); found and fixed a crash on non-integer Retry-After in worker/http.py | #36 |
 | 2026-10-09 | 1.0 | Reviewed and approved #43: ran worker tests, checked sync_state, fact grain and RLS in Supabase | #43 |
 | 2026-10-10 | 2.0 | Reviewed and approved #46 (ran the worker locally, checked sync_state); built the calls loader and tests, loaded 30,554 calls, ran the evidence queries (match the snapshot exactly) | #46, #37 |
+| 2026-10-11 | 1.5 | Finished the CRM sync and posted its evidence on #29; reviewed and approved #52 (checked the first worker-sync run, wrote and ran a script that checks the live dashboard against the snapshot: 30 of 30 match) | #29, #51, #52, #34 |
