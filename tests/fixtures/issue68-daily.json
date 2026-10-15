@@ -1,0 +1,605 @@
+{
+  "description": "Synthetic fixtures, not historical production anomalies",
+  "cases": [
+    {
+      "id": "empty",
+      "rows": [],
+      "expected": {
+        "buckets": []
+      }
+    },
+    {
+      "id": "exact-micros",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        },
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "b"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000002",
+          "reported_leads": "0.2"
+        }
+      ],
+      "expected": {
+        "buckets": [
+          {
+            "key": [
+              "2026-09-01",
+              "google_ads",
+              "google_ads",
+              "acct1",
+              "camp1",
+              "brand"
+            ],
+            "spend_usd": "0.000003",
+            "reported_leads": "0.3",
+            "source_row_count": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "separate-platform",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        },
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "non_brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "m"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "3.50",
+          "reported_leads": "1.25"
+        }
+      ],
+      "expected": {
+        "buckets": [
+          {
+            "key": [
+              "2026-09-01",
+              "google_ads",
+              "google_ads",
+              "acct1",
+              "camp1",
+              "brand"
+            ],
+            "spend_usd": "0.000001",
+            "reported_leads": "0.1",
+            "source_row_count": 1
+          },
+          {
+            "key": [
+              "2026-09-01",
+              "meta",
+              "meta_ads",
+              "acct1",
+              "camp1",
+              "non_brand"
+            ],
+            "spend_usd": "3.50",
+            "reported_leads": "1.25",
+            "source_row_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "separate-date",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        },
+        {
+          "analysis_date": "2026-09-02",
+          "channel": "lsa",
+          "source_platform": "lsa",
+          "source_account_id": null,
+          "campaign_id": null,
+          "campaign_name": null,
+          "brand_classification": "not_applicable",
+          "raw_key": [
+            "2026-09-02",
+            "no-account",
+            "l"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0",
+          "reported_leads": "1"
+        }
+      ],
+      "expected": {
+        "buckets": [
+          {
+            "key": [
+              "2026-09-01",
+              "google_ads",
+              "google_ads",
+              "acct1",
+              "camp1",
+              "brand"
+            ],
+            "spend_usd": "0.000001",
+            "reported_leads": "0.1",
+            "source_row_count": 1
+          },
+          {
+            "key": [
+              "2026-09-02",
+              "lsa",
+              "lsa",
+              null,
+              null,
+              "not_applicable"
+            ],
+            "spend_usd": "0",
+            "reported_leads": "1",
+            "source_row_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "separate-account",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        },
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct2",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct2",
+            "b"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000002",
+          "reported_leads": "0.2"
+        }
+      ],
+      "expected": {
+        "buckets": [
+          {
+            "key": [
+              "2026-09-01",
+              "google_ads",
+              "google_ads",
+              "acct1",
+              "camp1",
+              "brand"
+            ],
+            "spend_usd": "0.000001",
+            "reported_leads": "0.1",
+            "source_row_count": 1
+          },
+          {
+            "key": [
+              "2026-09-01",
+              "google_ads",
+              "google_ads",
+              "acct2",
+              "camp1",
+              "brand"
+            ],
+            "spend_usd": "0.000002",
+            "reported_leads": "0.2",
+            "source_row_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "all-platforms",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        },
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "non_brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "m"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "3.50",
+          "reported_leads": "1.25"
+        },
+        {
+          "analysis_date": "2026-09-02",
+          "channel": "lsa",
+          "source_platform": "lsa",
+          "source_account_id": null,
+          "campaign_id": null,
+          "campaign_name": null,
+          "brand_classification": "not_applicable",
+          "raw_key": [
+            "2026-09-02",
+            "no-account",
+            "l"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0",
+          "reported_leads": "1"
+        }
+      ],
+      "expected": {
+        "buckets": [
+          {
+            "key": [
+              "2026-09-01",
+              "google_ads",
+              "google_ads",
+              "acct1",
+              "camp1",
+              "brand"
+            ],
+            "spend_usd": "0.000001",
+            "reported_leads": "0.1",
+            "source_row_count": 1
+          },
+          {
+            "key": [
+              "2026-09-01",
+              "meta",
+              "meta_ads",
+              "acct1",
+              "camp1",
+              "non_brand"
+            ],
+            "spend_usd": "3.50",
+            "reported_leads": "1.25",
+            "source_row_count": 1
+          },
+          {
+            "key": [
+              "2026-09-02",
+              "lsa",
+              "lsa",
+              null,
+              null,
+              "not_applicable"
+            ],
+            "spend_usd": "0",
+            "reported_leads": "1",
+            "source_row_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "restated-replacement",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "9.000000",
+          "reported_leads": "2"
+        }
+      ],
+      "expected": {
+        "buckets": [
+          {
+            "key": [
+              "2026-09-01",
+              "google_ads",
+              "google_ads",
+              "acct1",
+              "camp1",
+              "brand"
+            ],
+            "spend_usd": "9.000000",
+            "reported_leads": "2",
+            "source_row_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "unknown-brand",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": null,
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        }
+      ],
+      "expected": {
+        "buckets": [
+          {
+            "key": [
+              "2026-09-01",
+              "google_ads",
+              "google_ads",
+              "acct1",
+              "camp1",
+              null
+            ],
+            "spend_usd": "0.000001",
+            "reported_leads": "0.1",
+            "source_row_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "duplicate-natural-key",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        },
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        }
+      ],
+      "expected": {
+        "error": "duplicate source natural key; provide current upserted rows"
+      }
+    },
+    {
+      "id": "restated-duplicate",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        },
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "10",
+          "reported_leads": "0.1"
+        }
+      ],
+      "expected": {
+        "error": "duplicate source natural key; provide current upserted rows"
+      }
+    },
+    {
+      "id": "negative-spend",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": 2,
+          "spend_usd": "-1",
+          "reported_leads": "0.1"
+        }
+      ],
+      "expected": {
+        "error": "spend_usd: expected a finite non-negative Decimal"
+      }
+    },
+    {
+      "id": "invalid-clicks",
+      "rows": [
+        {
+          "analysis_date": "2026-09-01",
+          "channel": "google_ads",
+          "source_platform": "google_ads",
+          "source_account_id": "acct1",
+          "campaign_id": "camp1",
+          "campaign_name": "camp1",
+          "brand_classification": "brand",
+          "raw_key": [
+            "2026-09-01",
+            "acct1",
+            "a"
+          ],
+          "impressions": 10,
+          "clicks": -2,
+          "spend_usd": "0.000001",
+          "reported_leads": "0.1"
+        }
+      ],
+      "expected": {
+        "error": "clicks: expected a non-negative integer"
+      }
+    }
+  ]
+}
