@@ -36,6 +36,7 @@ Also:
 - Lint: `cd web && npm run lint`
 - Worker, locally: `python3 -m worker.run` (or `python3 -m worker.run lsa`). Tests: `python3 -m unittest discover -s worker/tests -t .`
 - Data-quality eval: `<command>`
+- Anomaly alert: `python3 -m worker.alerts` (`--since 2024-10-01` replays history). Rule and evidence: `notes/anomaly-alert.md`
 - Supabase CLI: `npx supabase <command>` (never `npm i -g supabase`)
 - App env vars (`web/.env.local`): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - Worker env vars (GitHub Actions secrets, or `.env.local` locally): `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `LAB_API_KEY`
