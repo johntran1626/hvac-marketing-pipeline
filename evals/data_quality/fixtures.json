@@ -1,0 +1,827 @@
+{
+  "normal": {
+    "calls": [
+      {
+        "call_id": "CL1000001",
+        "caller_hash": "5b519f28dc98",
+        "first_time_caller": true,
+        "duration_sec": 30,
+        "qualified": true
+      },
+      {
+        "call_id": "fixture-repeat",
+        "caller_hash": "5b519f28dc98",
+        "first_time_caller": false,
+        "duration_sec": 90,
+        "qualified": false
+      },
+      {
+        "call_id": "fixture-short",
+        "caller_hash": "fixture-short-caller",
+        "first_time_caller": true,
+        "duration_sec": 29,
+        "qualified": false
+      },
+      {
+        "call_id": "fixture-returning-short",
+        "caller_hash": "fixture-returning",
+        "first_time_caller": false,
+        "duration_sec": 29,
+        "qualified": false
+      }
+    ],
+    "call_facts": [
+      {
+        "call_id": "CL1000001",
+        "duration_sec": 30
+      },
+      {
+        "call_id": "fixture-repeat",
+        "duration_sec": 90
+      },
+      {
+        "call_id": "fixture-short",
+        "duration_sec": 29
+      },
+      {
+        "call_id": "fixture-returning-short",
+        "duration_sec": 29
+      }
+    ],
+    "unique_callers": 1,
+    "restatements": [
+      {
+        "date": "2026-09-20",
+        "campaign_id": "20814455901",
+        "ad_group_id": "149302118801",
+        "revision": 2,
+        "conversions": 3
+      },
+      {
+        "date": "2026-09-20",
+        "campaign_id": "20814455901",
+        "ad_group_id": "149302118801",
+        "revision": 1,
+        "conversions": 2
+      }
+    ],
+    "ad_facts": [
+      {
+        "date": "2026-09-20",
+        "campaign_id": "20814455901",
+        "ad_group_id": "149302118801",
+        "conversions": 3
+      }
+    ],
+    "dates": [
+      {
+        "id": "central-before-midnight",
+        "source": "calls",
+        "timestamp": "2026-09-21T04:59:59Z",
+        "fact_date": "2026-09-20"
+      },
+      {
+        "id": "central-midnight",
+        "source": "lsa",
+        "timestamp": "2026-09-21T05:00:00Z",
+        "fact_date": "2026-09-21"
+      },
+      {
+        "id": "pacific-before-midnight",
+        "source": "meta",
+        "timestamp": "2026-09-21T06:59:59Z",
+        "fact_date": "2026-09-20"
+      },
+      {
+        "id": "pacific-midnight",
+        "source": "meta",
+        "timestamp": "2026-09-21T07:00:00Z",
+        "fact_date": "2026-09-21"
+      },
+      {
+        "id": "central-winter",
+        "source": "calls",
+        "timestamp": "2026-01-21T05:30:00Z",
+        "fact_date": "2026-01-20"
+      },
+      {
+        "id": "dst-spring",
+        "source": "calls",
+        "timestamp": "2026-03-08T08:00:00Z",
+        "fact_date": "2026-03-08"
+      },
+      {
+        "id": "dst-fall",
+        "source": "calls",
+        "timestamp": "2026-11-01T07:00:00Z",
+        "fact_date": "2026-11-01"
+      },
+      {
+        "id": "meta-account-date",
+        "source": "meta",
+        "account_date": "2026-09-20",
+        "fact_date": "2026-09-20"
+      },
+      {
+        "id": "google-account-date",
+        "source": "google_ads",
+        "account_date": "2026-09-20",
+        "fact_date": "2026-09-20"
+      }
+    ],
+    "metrics": [
+      {
+        "id": "paid",
+        "spend": 25,
+        "denominator": 1
+      },
+      {
+        "id": "zero-spend",
+        "spend": 0,
+        "denominator": 1
+      }
+    ],
+    "attributions": [
+      {
+        "id": "brand",
+        "candidates": [
+          {
+            "source": "google_ads",
+            "brand": true
+          }
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "name": "normal",
+      "changes": [],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "restated-stale",
+      "changes": [
+        {
+          "path": [
+            "ad_facts",
+            0,
+            "conversions"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "DQ01": [
+          "2026-09-20/20814455901/149302118801"
+        ],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "restated-appended",
+      "changes": [
+        {
+          "path": [
+            "ad_facts"
+          ],
+          "value": [
+            {
+              "date": "2026-09-20",
+              "campaign_id": "20814455901",
+              "ad_group_id": "149302118801",
+              "conversions": 2
+            },
+            {
+              "date": "2026-09-20",
+              "campaign_id": "20814455901",
+              "ad_group_id": "149302118801",
+              "conversions": 3
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "DQ01": [
+          "2026-09-20/20814455901/149302118801"
+        ],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "repeated-id",
+      "changes": [
+        {
+          "path": [
+            "calls"
+          ],
+          "value": [
+            {
+              "call_id": "CL1000001",
+              "caller_hash": "5b519f28dc98",
+              "first_time_caller": true,
+              "duration_sec": 30,
+              "qualified": true
+            },
+            {
+              "call_id": "fixture-repeat",
+              "caller_hash": "5b519f28dc98",
+              "first_time_caller": false,
+              "duration_sec": 90,
+              "qualified": false
+            },
+            {
+              "call_id": "fixture-short",
+              "caller_hash": "fixture-short-caller",
+              "first_time_caller": true,
+              "duration_sec": 29,
+              "qualified": false
+            },
+            {
+              "call_id": "fixture-returning-short",
+              "caller_hash": "fixture-returning",
+              "first_time_caller": false,
+              "duration_sec": 29,
+              "qualified": false
+            },
+            {
+              "call_id": "CL1000001",
+              "caller_hash": "5b519f28dc98",
+              "first_time_caller": true,
+              "duration_sec": 30,
+              "qualified": true
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [
+          "CL1000001"
+        ],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": [
+          "CL1000001"
+        ]
+      }
+    },
+    {
+      "name": "duplicate-caller-counted",
+      "changes": [
+        {
+          "path": [
+            "calls",
+            1,
+            "first_time_caller"
+          ],
+          "value": true
+        },
+        {
+          "path": [
+            "calls",
+            1,
+            "qualified"
+          ],
+          "value": true
+        },
+        {
+          "path": [
+            "unique_callers"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [
+          "unique_callers"
+        ],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [
+          "caller:5b519f28dc98"
+        ],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "timezone-boundaries",
+      "changes": [
+        {
+          "path": [
+            "dates",
+            0,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        },
+        {
+          "path": [
+            "dates",
+            1,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        },
+        {
+          "path": [
+            "dates",
+            2,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        },
+        {
+          "path": [
+            "dates",
+            3,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        },
+        {
+          "path": [
+            "dates",
+            4,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        },
+        {
+          "path": [
+            "dates",
+            5,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        },
+        {
+          "path": [
+            "dates",
+            6,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        },
+        {
+          "path": [
+            "dates",
+            7,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        },
+        {
+          "path": [
+            "dates",
+            8,
+            "fact_date"
+          ],
+          "value": "2026-09-22"
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [
+          "central-before-midnight",
+          "central-midnight",
+          "pacific-before-midnight",
+          "pacific-midnight",
+          "central-winter",
+          "dst-spring",
+          "dst-fall",
+          "meta-account-date",
+          "google-account-date"
+        ],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "qualification-or-instead-of-and",
+      "changes": [
+        {
+          "path": [
+            "calls",
+            1,
+            "qualified"
+          ],
+          "value": true
+        },
+        {
+          "path": [
+            "calls",
+            2,
+            "qualified"
+          ],
+          "value": true
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [
+          "fixture-repeat",
+          "fixture-short"
+        ],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "qualification-strictly-over-30",
+      "changes": [
+        {
+          "path": [
+            "calls",
+            0,
+            "qualified"
+          ],
+          "value": false
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [
+          "CL1000001"
+        ],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "conflicting-first-time",
+      "changes": [
+        {
+          "path": [
+            "calls"
+          ],
+          "value": [
+            {
+              "call_id": "CL1000001",
+              "caller_hash": "5b519f28dc98",
+              "first_time_caller": true,
+              "duration_sec": 30,
+              "qualified": true
+            },
+            {
+              "call_id": "fixture-repeat",
+              "caller_hash": "5b519f28dc98",
+              "first_time_caller": false,
+              "duration_sec": 90,
+              "qualified": false
+            },
+            {
+              "call_id": "fixture-short",
+              "caller_hash": "fixture-short-caller",
+              "first_time_caller": true,
+              "duration_sec": 29,
+              "qualified": false
+            },
+            {
+              "call_id": "fixture-returning-short",
+              "caller_hash": "fixture-returning",
+              "first_time_caller": false,
+              "duration_sec": 29,
+              "qualified": false
+            },
+            {
+              "call_id": "CL1000001",
+              "caller_hash": "5b519f28dc98",
+              "first_time_caller": false,
+              "duration_sec": 30,
+              "qualified": false
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [
+          "CL1000001"
+        ],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [
+          "call:CL1000001"
+        ],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": [
+          "CL1000001"
+        ]
+      }
+    },
+    {
+      "name": "missing-spend",
+      "changes": [
+        {
+          "path": [
+            "metrics",
+            0,
+            "spend"
+          ],
+          "value": null
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [
+          "paid"
+        ],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "missing-denominator",
+      "changes": [
+        {
+          "path": [
+            "metrics",
+            0,
+            "denominator"
+          ],
+          "value": null
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [
+          "paid"
+        ],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "zero-denominator",
+      "changes": [
+        {
+          "path": [
+            "metrics",
+            0,
+            "denominator"
+          ],
+          "value": 0
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [
+          "paid"
+        ],
+        "DQ09": [],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "ambiguous-brand-source",
+      "changes": [
+        {
+          "path": [
+            "attributions",
+            0,
+            "candidates"
+          ],
+          "value": [
+            {
+              "source": "google_ads",
+              "brand": true
+            },
+            {
+              "source": "meta",
+              "brand": false
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [
+          "brand"
+        ],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "unmapped-attribution",
+      "changes": [
+        {
+          "path": [
+            "attributions",
+            0,
+            "candidates"
+          ],
+          "value": []
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [
+          "brand"
+        ],
+        "DQ10": []
+      }
+    },
+    {
+      "name": "raw-fact-value-mismatch",
+      "changes": [
+        {
+          "path": [
+            "call_facts",
+            0,
+            "duration_sec"
+          ],
+          "value": 31
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": [
+          "CL1000001"
+        ]
+      }
+    },
+    {
+      "name": "raw-fact-missing",
+      "changes": [
+        {
+          "path": [
+            "call_facts"
+          ],
+          "value": [
+            {
+              "call_id": "fixture-repeat",
+              "duration_sec": 90
+            },
+            {
+              "call_id": "fixture-short",
+              "duration_sec": 29
+            },
+            {
+              "call_id": "fixture-returning-short",
+              "duration_sec": 29
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": [
+          "CL1000001"
+        ]
+      }
+    },
+    {
+      "name": "raw-fact-orphan",
+      "changes": [
+        {
+          "path": [
+            "call_facts"
+          ],
+          "value": [
+            {
+              "call_id": "CL1000001",
+              "duration_sec": 30
+            },
+            {
+              "call_id": "fixture-repeat",
+              "duration_sec": 90
+            },
+            {
+              "call_id": "fixture-short",
+              "duration_sec": 29
+            },
+            {
+              "call_id": "fixture-returning-short",
+              "duration_sec": 29
+            },
+            {
+              "call_id": "fixture-orphan",
+              "duration_sec": 30
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "DQ01": [],
+        "DQ02": [],
+        "DQ03": [],
+        "DQ04": [],
+        "DQ05": [],
+        "DQ06": [],
+        "DQ07": [],
+        "DQ08": [],
+        "DQ09": [],
+        "DQ10": [
+          "fixture-orphan"
+        ]
+      }
+    }
+  ]
+}
