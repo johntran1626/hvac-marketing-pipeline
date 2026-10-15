@@ -28,6 +28,7 @@ class GoogleNormalizationTests(unittest.TestCase):
         self.assertEqual(output.reported_leads, Decimal("9.42"))
         self.assertEqual((output.channel, output.source_platform), ("google_ads", "google_ads"))
         self.assertEqual(output.raw_key, ("2026-09-01", "482-119-3307", "20114567803", "1551230021"))
+        self.assertIsNone(output.brand_classification)
         self.assertNotIn("unique_leads", asdict(output))
 
     def test_micros_keep_subcent_precision(self):

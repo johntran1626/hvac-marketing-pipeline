@@ -1,0 +1,19 @@
+{
+  "input_fixture": "tests/fixtures/google-api-example.json",
+  "scope": "Synthetic documented API example; not a production response",
+  "expected_normalized_output": {
+    "analysis_date": "2026-09-01",
+    "channel": "google_ads",
+    "source_platform": "google_ads",
+    "source_account_id": "482-119-3307",
+    "campaign_id": "20114567803",
+    "campaign_name": "Furnace Repair",
+    "ad_group_id": "1551230021",
+    "ad_group_name": "Furnace Repair Near Me",
+    "brand_classification": null,
+    "impressions": 1314,
+    "clicks": 53,
+    "spend_usd": "623.277880",
+    "reported_leads": "9.42"
+  }
+}
