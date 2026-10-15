@@ -1,6 +1,7 @@
 import { connection } from "next/server";
 import {
   CHANNEL_LABELS,
+  anomalies,
   PAID_CHANNELS,
   centralYesterday,
   costPerLead,
@@ -125,6 +126,8 @@ export default async function Dashboard() {
   const latestDay = rows.map((r) => r.analysis_date).sort().at(-1)!;
   const label = (m: string) => (m === last && latestDay !== `${m}-${lastDayOf(m).padStart(2, "0")}` ? `${monthLabel(m)} (so far)` : monthLabel(m));
   const recent = rows.filter((r) => months.includes(month(r)));
+  // Alerts use all history for their 28-day baseline; show the ones that end in the window.
+  const alerts = anomalies(rows).filter((a) => a.end >= `${first}-01`);
   const byMonthChannel = sumBy(recent, (r) => `${month(r)}|${r.channel}`);
   const get = (m: string, c: string): Totals =>
     byMonthChannel.get(`${m}|${c}`) ?? { spend: 0, reported: 0, unique: 0, calls: 0 };
@@ -183,6 +186,27 @@ export default async function Dashboard() {
       </header>
 
       <Freshness rows={rows} />
+
+      <Section
+        title="Tracking alerts"
+        note="A paid channel kept spending but its platform reported 0 leads for 3+ days in a row, when the previous 28 days say it should have brought 7 or more. That usually means broken tracking (a lead form, pixel or conversion setup). Each one also opens an issue on GitHub."
+      >
+        {alerts.length === 0 ? (
+          <p className="text-sm">No alerts from {monthLabel(first)} to {monthLabel(last)}.</p>
+        ) : (
+          <ul className="space-y-2">
+            {alerts.map((a) => (
+              <li
+                key={`${a.channel}-${a.start}`}
+                className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-950 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-100"
+              >
+                <strong>{CHANNEL_LABELS[a.channel]}</strong>: 0 reported leads for {a.days} days ({a.start} to {a.end})
+                while spending <strong>{usd2(a.spend)}</strong>. Expected about {a.expected.toFixed(0)} leads.
+              </li>
+            ))}
+          </ul>
+        )}
+      </Section>
 
       <Section
         title="Cost per lead by channel and month"
