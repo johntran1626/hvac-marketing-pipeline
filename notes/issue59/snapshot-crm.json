@@ -1,0 +1,162 @@
+{
+  "scope": "Frozen CRM snapshot; proposed dictionary is not an accepted production rule.",
+  "header": [
+    "job_id",
+    "customer_id",
+    "created_at",
+    "updated_at",
+    "lead_source",
+    "job_type",
+    "status",
+    "revenue_usd",
+    "zip"
+  ],
+  "mapping_version": "draft-2026-10-07",
+  "mapping_fingerprint": "7adab8917bd51db0b4b9982deb9619f7080102cfc1ee42c98b2217f8fceaaed5",
+  "reconciliation": "PASS: all booking-date/source buckets and job/revenue metrics match raw CSV calculations.",
+  "raw_rows": 9294,
+  "distinct_job_ids": 9294,
+  "daily_buckets": 3831,
+  "first_booking_day_central": "2024-10-01",
+  "last_booking_day_central": "2026-09-22",
+  "completed_jobs": 7819,
+  "completed_revenue_usd": "4253964.00",
+  "missing_completed_revenue_jobs": 0,
+  "unresolved_source_jobs": 3196,
+  "status_counts": {
+    "canceled": 800,
+    "completed": 7819,
+    "estimate_lost": 355,
+    "estimate_sold": 219,
+    "scheduled": 101
+  },
+  "raw_source_label_counts": {
+    "": 817,
+    "?": 341,
+    "FB": 40,
+    "Facebook": 44,
+    "GMB": 34,
+    "GOOGLE": 27,
+    "GOOGLE LSA": 77,
+    "Google": 490,
+    "Google Ads": 130,
+    "Google Local": 35,
+    "HOA": 20,
+    "LSA": 65,
+    "MAINT PLAN": 126,
+    "Meta": 8,
+    "Nextdoor": 51,
+    "Repeat customer": 232,
+    "Yelp": 86,
+    "ad": 20,
+    "builder": 37,
+    "customer": 135,
+    "existing": 270,
+    "existing customer": 930,
+    "facebok": 8,
+    "facebook": 81,
+    "fb": 18,
+    "fb ad": 10,
+    "friend": 108,
+    "googel": 22,
+    "google": 849,
+    "google ad": 75,
+    "google guaranteed": 66,
+    "google maps": 192,
+    "google reviews": 134,
+    "google screened": 13,
+    "google search": 59,
+    "instagram": 15,
+    "internet": 176,
+    "local services": 27,
+    "maintenance plan": 476,
+    "maps": 87,
+    "neighbor": 108,
+    "nextdoor": 81,
+    "online": 165,
+    "plan": 247,
+    "plan member": 241,
+    "referral": 216,
+    "referral - neighbor": 161,
+    "repeat": 519,
+    "returning": 180,
+    "reviews": 61,
+    "saw truck": 143,
+    "site": 42,
+    "truck": 46,
+    "web": 88,
+    "web form": 73,
+    "webiste": 45,
+    "website": 263,
+    "yard sign": 56,
+    "yelp": 128
+  },
+  "by_proposed_channel": {
+    "builder_hoa": {
+      "jobs": 57,
+      "completed_jobs": 51,
+      "completed_revenue_usd": "26387.00"
+    },
+    "direct": {
+      "jobs": 245,
+      "completed_jobs": 204,
+      "completed_revenue_usd": "124960.00"
+    },
+    "existing_customer": {
+      "jobs": 2266,
+      "completed_jobs": 1972,
+      "completed_revenue_usd": "1147349.00"
+    },
+    "gbp": {
+      "jobs": 313,
+      "completed_jobs": 262,
+      "completed_revenue_usd": "150250.00"
+    },
+    "google_ads": {
+      "jobs": 205,
+      "completed_jobs": 162,
+      "completed_revenue_usd": "197441.00"
+    },
+    "google_lsa": {
+      "jobs": 248,
+      "completed_jobs": 198,
+      "completed_revenue_usd": "80517.00"
+    },
+    "maintenance_plan": {
+      "jobs": 1090,
+      "completed_jobs": 963,
+      "completed_revenue_usd": "152719.00"
+    },
+    "meta": {
+      "jobs": 224,
+      "completed_jobs": 200,
+      "completed_revenue_usd": "66765.00"
+    },
+    "nextdoor": {
+      "jobs": 132,
+      "completed_jobs": 108,
+      "completed_revenue_usd": "72450.00"
+    },
+    "referral": {
+      "jobs": 593,
+      "completed_jobs": 498,
+      "completed_revenue_usd": "308830.00"
+    },
+    "unattributed": {
+      "jobs": 3196,
+      "completed_jobs": 2595,
+      "completed_revenue_usd": "1579481.00"
+    },
+    "website": {
+      "jobs": 511,
+      "completed_jobs": 424,
+      "completed_revenue_usd": "246220.00"
+    },
+    "yelp": {
+      "jobs": 214,
+      "completed_jobs": 182,
+      "completed_revenue_usd": "100595.00"
+    }
+  },
+  "live_api_and_fact_writes": "not run"
+}

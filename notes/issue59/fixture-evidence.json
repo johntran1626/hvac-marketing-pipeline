@@ -1,0 +1,856 @@
+{
+  "actual_facts": [
+    {
+      "bucket": [
+        "2026-01-01",
+        "direct",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-01-02",
+        "direct",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-21",
+        "google_ads",
+        "call_tracking",
+        null,
+        "20814455917",
+        "non_brand"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "call_tracking",
+        null,
+        null,
+        null
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 1
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "call_tracking",
+        null,
+        "20814455917",
+        "non_brand"
+      ],
+      "metrics": {
+        "calls": 4,
+        "first_time_calls": 2,
+        "returning_calls": 2,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "unattributed",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 1
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-21",
+        "google_ads",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "completed_jobs": 1,
+        "jobs": 1,
+        "known_completed_revenue_usd": "100.25",
+        "missing_completed_revenue_jobs": 0,
+        "revenue_usd": "100.25",
+        "unresolved_jobs": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "completed_jobs": 1,
+        "jobs": 5,
+        "known_completed_revenue_usd": "20.10",
+        "missing_completed_revenue_jobs": 0,
+        "revenue_usd": "20.10",
+        "unresolved_jobs": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "unattributed",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "completed_jobs": 2,
+        "jobs": 3,
+        "known_completed_revenue_usd": "3.05",
+        "missing_completed_revenue_jobs": 1,
+        "revenue_usd": null,
+        "unresolved_jobs": 3
+      }
+    }
+  ],
+  "cases": [
+    {
+      "classification": "SYNTHETIC",
+      "expected_mismatches": [],
+      "mismatches": [],
+      "name": "normal",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": 2,
+          "bucket": [
+            "2026-09-22",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": 1,
+          "field": "unique_leads"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": 2,
+          "bucket": [
+            "2026-09-22",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": 1,
+          "field": "unique_leads"
+        }
+      ],
+      "name": "threshold_29_counted",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": 3,
+          "bucket": [
+            "2026-09-22",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": 1,
+          "field": "unique_leads"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": 3,
+          "bucket": [
+            "2026-09-22",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": 1,
+          "field": "unique_leads"
+        }
+      ],
+      "name": "returning_caller_counted",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": 4,
+          "bucket": [
+            "2026-09-22",
+            "google_ads",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": 5,
+          "field": "jobs"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": 4,
+          "bucket": [
+            "2026-09-22",
+            "google_ads",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": 5,
+          "field": "jobs"
+        }
+      ],
+      "name": "booking_dropped",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": 2,
+          "bucket": [
+            "2026-09-22",
+            "google_ads",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": 1,
+          "field": "completed_jobs"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": 2,
+          "bucket": [
+            "2026-09-22",
+            "google_ads",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": 1,
+          "field": "completed_jobs"
+        }
+      ],
+      "name": "scheduled_marked_completed",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": "99.25",
+          "bucket": [
+            "2026-09-21",
+            "google_ads",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": "100.25",
+          "field": "revenue_usd"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": "99.25",
+          "bucket": [
+            "2026-09-21",
+            "google_ads",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": "100.25",
+          "field": "revenue_usd"
+        }
+      ],
+      "name": "gross_revenue_understated",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": 0,
+          "bucket": [
+            "2026-09-22",
+            "unattributed",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": 3,
+          "field": "unresolved_jobs"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": 0,
+          "bucket": [
+            "2026-09-22",
+            "unattributed",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": 3,
+          "field": "unresolved_jobs"
+        }
+      ],
+      "name": "unknown_attribution_hidden",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": "3.05",
+          "bucket": [
+            "2026-09-22",
+            "unattributed",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": null,
+          "field": "revenue_usd"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": "3.05",
+          "bucket": [
+            "2026-09-22",
+            "unattributed",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": null,
+          "field": "revenue_usd"
+        }
+      ],
+      "name": "missing_revenue_zero_filled",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": null,
+          "bucket": [
+            "2026-09-21",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": {
+            "calls": 1,
+            "first_time_calls": 1,
+            "returning_calls": 0,
+            "unique_leads": 1,
+            "unresolved_calls": 0
+          },
+          "field": "__bucket__"
+        },
+        {
+          "actual": {
+            "calls": 1,
+            "first_time_calls": 1,
+            "returning_calls": 0,
+            "unique_leads": 1,
+            "unresolved_calls": 0
+          },
+          "bucket": [
+            "2026-09-23",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": null,
+          "field": "__bucket__"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": null,
+          "bucket": [
+            "2026-09-21",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": {
+            "calls": 1,
+            "first_time_calls": 1,
+            "returning_calls": 0,
+            "unique_leads": 1,
+            "unresolved_calls": 0
+          },
+          "field": "__bucket__"
+        },
+        {
+          "actual": {
+            "calls": 1,
+            "first_time_calls": 1,
+            "returning_calls": 0,
+            "unique_leads": 1,
+            "unresolved_calls": 0
+          },
+          "bucket": [
+            "2026-09-23",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": null,
+          "field": "__bucket__"
+        }
+      ],
+      "name": "shifted_date_bucket",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": {
+            "completed_jobs": 2,
+            "jobs": 3,
+            "known_completed_revenue_usd": "3.05",
+            "missing_completed_revenue_jobs": 1,
+            "revenue_usd": null,
+            "unresolved_jobs": 3
+          },
+          "bucket": [
+            "2026-09-22",
+            "meta",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": null,
+          "field": "__bucket__"
+        },
+        {
+          "actual": null,
+          "bucket": [
+            "2026-09-22",
+            "unattributed",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": {
+            "completed_jobs": 2,
+            "jobs": 3,
+            "known_completed_revenue_usd": "3.05",
+            "missing_completed_revenue_jobs": 1,
+            "revenue_usd": null,
+            "unresolved_jobs": 3
+          },
+          "field": "__bucket__"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": {
+            "completed_jobs": 2,
+            "jobs": 3,
+            "known_completed_revenue_usd": "3.05",
+            "missing_completed_revenue_jobs": 1,
+            "revenue_usd": null,
+            "unresolved_jobs": 3
+          },
+          "bucket": [
+            "2026-09-22",
+            "meta",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": null,
+          "field": "__bucket__"
+        },
+        {
+          "actual": null,
+          "bucket": [
+            "2026-09-22",
+            "unattributed",
+            "crm",
+            null,
+            null,
+            "not_applicable"
+          ],
+          "expected": {
+            "completed_jobs": 2,
+            "jobs": 3,
+            "known_completed_revenue_usd": "3.05",
+            "missing_completed_revenue_jobs": 1,
+            "revenue_usd": null,
+            "unresolved_jobs": 3
+          },
+          "field": "__bucket__"
+        }
+      ],
+      "name": "ambiguous_source_forced_to_paid",
+      "passed": true
+    },
+    {
+      "classification": "SYNTHETIC fact corruption",
+      "expected_mismatches": [
+        {
+          "actual": {
+            "calls": 1,
+            "first_time_calls": 1,
+            "returning_calls": 0,
+            "unique_leads": 1,
+            "unresolved_calls": 0
+          },
+          "bucket": [
+            "2026-09-21",
+            "google_ads",
+            "call_tracking",
+            "synthetic-account",
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": null,
+          "field": "__bucket__"
+        },
+        {
+          "actual": null,
+          "bucket": [
+            "2026-09-21",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": {
+            "calls": 1,
+            "first_time_calls": 1,
+            "returning_calls": 0,
+            "unique_leads": 1,
+            "unresolved_calls": 0
+          },
+          "field": "__bucket__"
+        }
+      ],
+      "mismatches": [
+        {
+          "actual": {
+            "calls": 1,
+            "first_time_calls": 1,
+            "returning_calls": 0,
+            "unique_leads": 1,
+            "unresolved_calls": 0
+          },
+          "bucket": [
+            "2026-09-21",
+            "google_ads",
+            "call_tracking",
+            "synthetic-account",
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": null,
+          "field": "__bucket__"
+        },
+        {
+          "actual": null,
+          "bucket": [
+            "2026-09-21",
+            "google_ads",
+            "call_tracking",
+            null,
+            "20814455917",
+            "non_brand"
+          ],
+          "expected": {
+            "calls": 1,
+            "first_time_calls": 1,
+            "returning_calls": 0,
+            "unique_leads": 1,
+            "unresolved_calls": 0
+          },
+          "field": "__bucket__"
+        }
+      ],
+      "name": "invented_account",
+      "passed": true
+    },
+    {
+      "actual_error": "duplicate call_id; provide current upserted rows",
+      "classification": "SYNTHETIC source corruption",
+      "expected_error": "duplicate call_id; provide current upserted rows",
+      "name": "duplicate_call",
+      "passed": true
+    },
+    {
+      "actual_error": "duplicate job_id; provide current upserted jobs",
+      "classification": "SYNTHETIC source corruption",
+      "expected_error": "duplicate job_id; provide current upserted jobs",
+      "name": "duplicate_job",
+      "passed": true
+    },
+    {
+      "actual_error": "caller has multiple first-time records in supplied history",
+      "classification": "SYNTHETIC source corruption",
+      "expected_error": "caller has multiple first-time records in supplied history",
+      "name": "conflicting_first_time",
+      "passed": true
+    }
+  ],
+  "expected_facts": [
+    {
+      "bucket": [
+        "2026-09-21",
+        "google_ads",
+        "call_tracking",
+        null,
+        "20814455917",
+        "non_brand"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "call_tracking",
+        null,
+        "20814455917",
+        "non_brand"
+      ],
+      "metrics": {
+        "calls": 4,
+        "first_time_calls": 2,
+        "returning_calls": 2,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "unattributed",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 1
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "call_tracking",
+        null,
+        null,
+        null
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 1
+      }
+    },
+    {
+      "bucket": [
+        "2026-01-01",
+        "direct",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-01-02",
+        "direct",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-21",
+        "google_ads",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "completed_jobs": 1,
+        "jobs": 1,
+        "known_completed_revenue_usd": "100.25",
+        "missing_completed_revenue_jobs": 0,
+        "revenue_usd": "100.25",
+        "unresolved_jobs": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "completed_jobs": 1,
+        "jobs": 5,
+        "known_completed_revenue_usd": "20.10",
+        "missing_completed_revenue_jobs": 0,
+        "revenue_usd": "20.10",
+        "unresolved_jobs": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "unattributed",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "completed_jobs": 2,
+        "jobs": 3,
+        "known_completed_revenue_usd": "3.05",
+        "missing_completed_revenue_jobs": 1,
+        "revenue_usd": null,
+        "unresolved_jobs": 3
+      }
+    }
+  ],
+  "fixture_sha256": "3f60cdfa9ab8352e51e8cd61657b0537679ea01c3c646299827f4b9b20e41b7f",
+  "historical_discrepancy": "Not claimed: no independently verified historical discrepancy.",
+  "passed": true,
+  "scope": "Offline M2 fact-shaped normalization only; no deployed database validation."
+}

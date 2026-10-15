@@ -1,0 +1,92 @@
+{
+  "scope": "Frozen Calls snapshot only; candidate rules are comparisons, not a canonical team decision.",
+  "snapshot": "data/snapshot-2026-09-23/calls.csv",
+  "header": [
+    "call_id",
+    "started_at",
+    "duration_sec",
+    "tracking_number",
+    "source",
+    "campaign_id",
+    "caller_hash",
+    "first_time_caller"
+  ],
+  "reconciliation": "PASS: every daily bucket and call/lead metric matches independent raw calculations under thresholds 0 and 30.",
+  "raw_rows": 29757,
+  "distinct_call_ids": 29757,
+  "daily_buckets_per_rule": 4027,
+  "first_day_central": "2024-10-01",
+  "last_day_central": "2026-09-22",
+  "first_time_calls": 8572,
+  "returning_calls": 21185,
+  "distinct_first_time_hashes": 8572,
+  "repeated_first_time_hash_groups": 0,
+  "first_time_ge30_unique_leads": 6774,
+  "unresolved_attribution_calls": 0,
+  "by_channel_all_history": {
+    "direct": {
+      "calls": 17665,
+      "first_time_unique_leads": 2136,
+      "first_time_ge30_unique_leads": 1355
+    },
+    "gbp": {
+      "calls": 5459,
+      "first_time_unique_leads": 2616,
+      "first_time_ge30_unique_leads": 2074
+    },
+    "google_ads": {
+      "calls": 2625,
+      "first_time_unique_leads": 1294,
+      "first_time_ge30_unique_leads": 1148
+    },
+    "google_lsa": {
+      "calls": 1640,
+      "first_time_unique_leads": 1312,
+      "first_time_ge30_unique_leads": 1153
+    },
+    "meta": {
+      "calls": 165,
+      "first_time_unique_leads": 113,
+      "first_time_ge30_unique_leads": 104
+    },
+    "website": {
+      "calls": 2203,
+      "first_time_unique_leads": 1101,
+      "first_time_ge30_unique_leads": 940
+    }
+  },
+  "comparison_period": "Inclusive Central dates 2026-08-24 through 2026-09-22",
+  "by_channel_comparison_period": {
+    "direct": {
+      "calls": 1003,
+      "first_time_unique_leads": 107,
+      "first_time_ge30_unique_leads": 74
+    },
+    "gbp": {
+      "calls": 318,
+      "first_time_unique_leads": 151,
+      "first_time_ge30_unique_leads": 126
+    },
+    "google_ads": {
+      "calls": 221,
+      "first_time_unique_leads": 109,
+      "first_time_ge30_unique_leads": 100
+    },
+    "google_lsa": {
+      "calls": 89,
+      "first_time_unique_leads": 70,
+      "first_time_ge30_unique_leads": 68
+    },
+    "meta": {
+      "calls": 9,
+      "first_time_unique_leads": 6,
+      "first_time_ge30_unique_leads": 6
+    },
+    "website": {
+      "calls": 144,
+      "first_time_unique_leads": 73,
+      "first_time_ge30_unique_leads": 69
+    }
+  },
+  "live_api_and_fact_writes": "not run"
+}
