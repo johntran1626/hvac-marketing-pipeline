@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -29,6 +31,10 @@ jobs:
       - name: Install web dependencies
         working-directory: web
         run: npm ci
+
+      - name: Audit production dependencies
+        working-directory: web
+        run: npm audit --omit=dev --audit-level=high
 
       - name: Lint
         working-directory: web
@@ -46,5 +52,13 @@ jobs:
         if: ${{ hashFiles('tests/**/*.py') != '' }}
         run: python3 -m unittest discover -s tests -q
 
-      - name: Check patch whitespace
-        run: git diff --check
+      - name: Check PR patch whitespace
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: git diff --check "$BASE_SHA" "$HEAD_SHA"
+
+      - name: Check manual-run patch whitespace
+        if: github.event_name == 'workflow_dispatch'
+        run: git diff --check HEAD^ HEAD
