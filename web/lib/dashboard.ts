@@ -6,20 +6,34 @@ export type FactRow = {
   channel: string;
   source_platform: string;
   brand_classification: string;
-  spend_usd: number;
-  reported_leads: number;
-  unique_leads: number;
-  calls: number;
+  campaign_id: string | null;
+  campaign_name: string | null;
+  spend_usd: number | null;
+  reported_leads: number | null;
+  unique_leads: number | null;
+  calls: number | null;
   synced_at: string;
   data_through: string;
 };
 
 const COLUMNS =
-  "analysis_date,channel,source_platform,brand_classification,spend_usd,reported_leads,unique_leads,calls,synced_at,data_through";
+  "analysis_date,channel,source_platform,brand_classification,campaign_id,campaign_name,spend_usd,reported_leads,unique_leads,calls,synced_at,data_through";
+const nullableNumber = (value: unknown): number | null =>
+  value === null || value === undefined || (typeof value === "string" && value.trim() === "") || !Number.isFinite(Number(value)) ? null : Number(value);
+
 const PAGE = 1000; // PostgREST returns at most 1,000 rows per request
 
 export async function loadFacts(): Promise<FactRow[]> {
   const supabase = createSupabaseClient();
+  // Guard offset pagination against a concurrent transactional fact rebuild.
+  // Ordering below includes every column of the source's unique grain.
+  const snapshot = async () => {
+    const { data, error, count } = await supabase.from("fact_marketing_daily")
+      .select("synced_at", { count: "exact" }).order("synced_at", { ascending: false }).limit(1);
+    if (error || count === null) throw new Error("Could not verify source snapshot.");
+    return { count, latest: data?.[0]?.synced_at ?? null };
+  };
+  const before = await snapshot();
   const rows: FactRow[] = [];
   for (let from = 0; ; from += PAGE) {
     const { data, error } = await supabase
@@ -28,18 +42,26 @@ export async function loadFacts(): Promise<FactRow[]> {
       .order("analysis_date")
       .order("channel")
       .order("source_platform")
+      .order("source_account_id")
+      .order("campaign_id")
+      .order("brand_classification")
       .range(from, from + PAGE - 1);
     if (error) throw new Error("Could not read fact_marketing_daily.");
     rows.push(
       ...data.map((r) => ({
         ...r,
-        spend_usd: Number(r.spend_usd),
-        reported_leads: Number(r.reported_leads),
-        unique_leads: Number(r.unique_leads),
-        calls: Number(r.calls),
+        spend_usd: nullableNumber(r.spend_usd),
+        reported_leads: nullableNumber(r.reported_leads),
+        unique_leads: nullableNumber(r.unique_leads),
+        calls: nullableNumber(r.calls),
       })),
     );
-    if (data.length < PAGE) return rows;
+    if (data.length < PAGE) {
+      const after = await snapshot();
+      if (before.count !== after.count || after.count !== rows.length || before.latest !== after.latest)
+        throw new Error("Source changed during pagination; reload to obtain consistent evidence.");
+      return rows;
+    }
   }
 }
 
@@ -51,40 +73,11 @@ export const CHANNEL_LABELS: Record<string, string> = {
   gbp: "Google Business Profile (free)",
   website: "Website",
   direct: "Direct",
+  unknown: "Unknown attribution",
+  unattributed: "Unattributed",
+  "": "Unknown attribution",
 };
 export const PAID_CHANNELS = ["google_ads", "google_lsa", "meta"];
-
-export type Totals = { spend: number; reported: number; unique: number; calls: number };
-const empty = (): Totals => ({ spend: 0, reported: 0, unique: 0, calls: 0 });
-
-function add(t: Totals, r: FactRow) {
-  t.spend += r.spend_usd;
-  t.reported += r.reported_leads;
-  t.unique += r.unique_leads;
-  t.calls += r.calls;
-}
-
-// Sum each metric by a key. Each source writes its own rows, so sums never double count:
-// spend and reported leads come from platform rows, unique leads and calls only from call rows.
-export function sumBy(rows: FactRow[], key: (r: FactRow) => string | null) {
-  const out = new Map<string, Totals>();
-  for (const r of rows) {
-    const k = key(r);
-    if (k === null) continue;
-    if (!out.has(k)) out.set(k, empty());
-    add(out.get(k)!, r);
-  }
-  return out;
-}
-
-export const month = (r: FactRow) => r.analysis_date.slice(0, 7);
-
-export function lastMonths(rows: FactRow[], n: number) {
-  return [...new Set(rows.map(month))].sort().slice(-n);
-}
-
-// Cost per lead = spend ÷ unique leads (first-time callers on the line 30 seconds or more).
-export const costPerLead = (t: Totals) => (t.unique > 0 ? t.spend / t.unique : null);
 
 // Freshness per source: the latest day loaded and when the fact table was last rebuilt.
 export function freshness(rows: FactRow[]) {
