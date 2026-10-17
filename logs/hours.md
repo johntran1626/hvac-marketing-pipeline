@@ -52,3 +52,5 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-09 | 1.0 | Reviewed and approved #43: ran worker tests, checked sync_state, fact grain and RLS in Supabase | #43 |
 | 2026-10-10 | 2.0 | Reviewed and approved #46 (ran the worker locally, checked sync_state); built the calls loader and tests, loaded 30,554 calls, ran the evidence queries (match the snapshot exactly) | #46, #37 |
 | 2026-10-11 | 1.5 | Finished the CRM sync and posted its evidence on #29; reviewed and approved #52 (checked the first worker-sync run, wrote and ran a script that checks the live dashboard against the snapshot: 30 of 30 match) | #29, #51, #52, #34 |
+| 2026-10-16 | 0.5 | Read Hamza's M2 feedback; linked a scheduled worker-sync run in #32 with its log; team meeting | #32 |
+| 2026-10-17 | 1.5 | Ran Kelsey's dashboard redesign locally, checked its YTD numbers against Supabase (all match) and posted feedback on #83; checked the live CRM labels and revenue, then opened #84 (booked jobs by channel in the fact table) | #83, #84, #31 |
