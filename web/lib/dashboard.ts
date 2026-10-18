@@ -6,23 +6,37 @@ export type FactRow = {
   channel: string;
   source_platform: string;
   brand_classification: string;
-  spend_usd: number;
-  reported_leads: number;
-  unique_leads: number;
-  calls: number;
-  jobs: number;
-  completed_jobs: number;
-  revenue_usd: number;
+  campaign_id: string | null;
+  campaign_name: string | null;
+  spend_usd: number | null;
+  reported_leads: number | null;
+  unique_leads: number | null;
+  calls: number | null;
+  jobs: number | null;
+  completed_jobs: number | null;
+  revenue_usd: number | null;
   synced_at: string;
   data_through: string;
 };
 
 const COLUMNS =
-  "analysis_date,channel,source_platform,brand_classification,spend_usd,reported_leads,unique_leads,calls,jobs,completed_jobs,revenue_usd,synced_at,data_through";
+  "analysis_date,channel,source_platform,brand_classification,campaign_id,campaign_name,spend_usd,reported_leads,unique_leads,calls,jobs,completed_jobs,revenue_usd,synced_at,data_through";
+const nullableNumber = (value: unknown): number | null =>
+  value === null || value === undefined || (typeof value === "string" && value.trim() === "") || !Number.isFinite(Number(value)) ? null : Number(value);
+
 const PAGE = 1000; // PostgREST returns at most 1,000 rows per request
 
 export async function loadFacts(): Promise<FactRow[]> {
   const supabase = createSupabaseClient();
+  // Guard offset pagination against a concurrent transactional fact rebuild.
+  // Ordering below includes every column of the source's unique grain.
+  const snapshot = async () => {
+    const { data, error, count } = await supabase.from("fact_marketing_daily")
+      .select("synced_at", { count: "exact" }).order("synced_at", { ascending: false }).limit(1);
+    if (error || count === null) throw new Error("Could not verify source snapshot.");
+    return { count, latest: data?.[0]?.synced_at ?? null };
+  };
+  const before = await snapshot();
   const rows: FactRow[] = [];
   for (let from = 0; ; from += PAGE) {
     const { data, error } = await supabase
@@ -31,21 +45,29 @@ export async function loadFacts(): Promise<FactRow[]> {
       .order("analysis_date")
       .order("channel")
       .order("source_platform")
+      .order("source_account_id")
+      .order("campaign_id")
+      .order("brand_classification")
       .range(from, from + PAGE - 1);
     if (error) throw new Error("Could not read fact_marketing_daily.");
     rows.push(
       ...data.map((r) => ({
         ...r,
-        spend_usd: Number(r.spend_usd),
-        reported_leads: Number(r.reported_leads),
-        unique_leads: Number(r.unique_leads),
-        calls: Number(r.calls),
-        jobs: Number(r.jobs),
-        completed_jobs: Number(r.completed_jobs),
-        revenue_usd: Number(r.revenue_usd),
+        spend_usd: nullableNumber(r.spend_usd),
+        reported_leads: nullableNumber(r.reported_leads),
+        unique_leads: nullableNumber(r.unique_leads),
+        calls: nullableNumber(r.calls),
+        jobs: nullableNumber(r.jobs),
+        completed_jobs: nullableNumber(r.completed_jobs),
+        revenue_usd: nullableNumber(r.revenue_usd),
       })),
     );
-    if (data.length < PAGE) return rows;
+    if (data.length < PAGE) {
+      const after = await snapshot();
+      if (before.count !== after.count || after.count !== rows.length || before.latest !== after.latest)
+        throw new Error("Source changed during pagination; reload to obtain consistent evidence.");
+      return rows;
+    }
   }
 }
 
@@ -57,16 +79,16 @@ export const CHANNEL_LABELS: Record<string, string> = {
   gbp: "Google Business Profile (free)",
   website: "Website",
   direct: "Direct",
-};
-// CRM-only channels (lead_source on booked jobs, #84). They have jobs but no spend or tracked calls.
-export const CRM_CHANNEL_LABELS: Record<string, string> = {
+  // CRM-only channels (lead_source on booked jobs, #84): jobs but no spend or tracked calls.
   referral: "Referral",
   existing_customer: "Existing customer",
   maintenance_plan: "Maintenance plan",
   yelp: "Yelp",
   nextdoor: "Nextdoor",
   builder_hoa: "Builder / HOA",
+  unknown: "Unknown attribution",
   unattributed: "Unattributed",
+  "": "Unknown attribution",
 };
 export const PAID_CHANNELS = ["google_ads", "google_lsa", "meta"];
 
@@ -74,13 +96,13 @@ export type Totals = { spend: number; reported: number; unique: number; calls: n
 export const empty = (): Totals => ({ spend: 0, reported: 0, unique: 0, calls: 0, jobs: 0, completed: 0, revenue: 0 });
 
 function add(t: Totals, r: FactRow) {
-  t.spend += r.spend_usd;
-  t.reported += r.reported_leads;
-  t.unique += r.unique_leads;
-  t.calls += r.calls;
-  t.jobs += r.jobs;
-  t.completed += r.completed_jobs;
-  t.revenue += r.revenue_usd;
+  t.spend += r.spend_usd ?? 0;
+  t.reported += r.reported_leads ?? 0;
+  t.unique += r.unique_leads ?? 0;
+  t.calls += r.calls ?? 0;
+  t.jobs += r.jobs ?? 0;
+  t.completed += r.completed_jobs ?? 0;
+  t.revenue += r.revenue_usd ?? 0;
 }
 
 // Sum each metric by a key. Each source writes its own rows, so sums never double count:
