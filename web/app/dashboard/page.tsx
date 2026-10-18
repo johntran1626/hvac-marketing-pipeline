@@ -1,10 +1,13 @@
 import { connection } from "next/server";
 import {
   CHANNEL_LABELS,
+  CRM_CHANNEL_LABELS,
   anomalies,
   PAID_CHANNELS,
   centralYesterday,
+  costPerJob,
   costPerLead,
+  empty,
   freshness,
   lastMonths,
   loadFacts,
@@ -34,6 +37,7 @@ const SOURCE_LABELS: Record<string, string> = {
   meta_ads: "Meta",
   lsa: "Google Guaranteed",
   call_tracking: "Call tracking",
+  crm: "CRM jobs",
 };
 
 function Freshness({ rows }: { rows: FactRow[] }) {
@@ -130,7 +134,7 @@ export default async function Dashboard() {
   const alerts = anomalies(rows).filter((a) => a.end >= `${first}-01`);
   const byMonthChannel = sumBy(recent, (r) => `${month(r)}|${r.channel}`);
   const get = (m: string, c: string): Totals =>
-    byMonthChannel.get(`${m}|${c}`) ?? { spend: 0, reported: 0, unique: 0, calls: 0 };
+    byMonthChannel.get(`${m}|${c}`) ?? empty();
 
   // 1. Cost per lead by channel and month (paid channels).
   const cplRows = months.map((m) => [
@@ -159,12 +163,29 @@ export default async function Dashboard() {
       ];
     });
 
+  // Booked jobs by channel (CRM lead_source, #84), next to that channel's phone leads and spend.
+  const jobRows = [...Object.keys(CHANNEL_LABELS), ...Object.keys(CRM_CHANNEL_LABELS)]
+    .filter((c) => (byChannel.get(c)?.jobs ?? 0) > 0)
+    .map((c) => {
+      const t = byChannel.get(c)!;
+      const paid = PAID_CHANNELS.includes(c);
+      return [
+        CHANNEL_LABELS[c] ?? CRM_CHANNEL_LABELS[c],
+        c in CHANNEL_LABELS ? num(t.unique) : "–",
+        num(t.jobs),
+        num(t.completed),
+        usd(t.revenue),
+        paid ? usd(t.spend) : "free",
+        paid ? usd2(costPerJob(t)) : "free",
+      ];
+    });
+
   // 3. Brand vs non-brand, Google Ads (campaign 20814455901 is brand).
   const brand = sumBy(
     recent.filter((r) => r.channel === "google_ads"),
     (r) => `${month(r)}|${r.brand_classification}`,
   );
-  const b = (m: string, k: string) => brand.get(`${m}|${k}`) ?? { spend: 0, reported: 0, unique: 0, calls: 0 };
+  const b = (m: string, k: string) => brand.get(`${m}|${k}`) ?? empty();
   const brandRows = months.map((m) => [
     label(m),
     ...["brand", "non_brand"].flatMap((k) => {
@@ -226,6 +247,20 @@ export default async function Dashboard() {
           head={["Channel", "Reported leads", "Unique leads", "Reported ÷ unique", "All calls", "Spend", "Cost per lead"]}
           rows={leadRows}
         />
+      </Section>
+
+      <Section
+        title="Booked jobs by channel"
+        note={`Jobs booked in the CRM, ${monthLabel(first)} to ${monthLabel(last)}, by the lead source the office typed in (canceled jobs excluded). Revenue counts completed jobs only. "Unattributed" is a blank or unclear source, like plain "google". Cost per booked job is spend ÷ booked jobs.`}
+      >
+        {jobRows.length === 0 ? (
+          <p className="text-sm">No CRM jobs in the fact table yet.</p>
+        ) : (
+          <Table
+            head={["Channel", "Unique phone leads", "Booked jobs", "Completed jobs", "Revenue", "Spend", "Cost per booked job"]}
+            rows={jobRows}
+          />
+        )}
       </Section>
 
       <Section

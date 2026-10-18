@@ -10,12 +10,15 @@ export type FactRow = {
   reported_leads: number;
   unique_leads: number;
   calls: number;
+  jobs: number;
+  completed_jobs: number;
+  revenue_usd: number;
   synced_at: string;
   data_through: string;
 };
 
 const COLUMNS =
-  "analysis_date,channel,source_platform,brand_classification,spend_usd,reported_leads,unique_leads,calls,synced_at,data_through";
+  "analysis_date,channel,source_platform,brand_classification,spend_usd,reported_leads,unique_leads,calls,jobs,completed_jobs,revenue_usd,synced_at,data_through";
 const PAGE = 1000; // PostgREST returns at most 1,000 rows per request
 
 export async function loadFacts(): Promise<FactRow[]> {
@@ -37,6 +40,9 @@ export async function loadFacts(): Promise<FactRow[]> {
         reported_leads: Number(r.reported_leads),
         unique_leads: Number(r.unique_leads),
         calls: Number(r.calls),
+        jobs: Number(r.jobs),
+        completed_jobs: Number(r.completed_jobs),
+        revenue_usd: Number(r.revenue_usd),
       })),
     );
     if (data.length < PAGE) return rows;
@@ -52,20 +58,34 @@ export const CHANNEL_LABELS: Record<string, string> = {
   website: "Website",
   direct: "Direct",
 };
+// CRM-only channels (lead_source on booked jobs, #84). They have jobs but no spend or tracked calls.
+export const CRM_CHANNEL_LABELS: Record<string, string> = {
+  referral: "Referral",
+  existing_customer: "Existing customer",
+  maintenance_plan: "Maintenance plan",
+  yelp: "Yelp",
+  nextdoor: "Nextdoor",
+  builder_hoa: "Builder / HOA",
+  unattributed: "Unattributed",
+};
 export const PAID_CHANNELS = ["google_ads", "google_lsa", "meta"];
 
-export type Totals = { spend: number; reported: number; unique: number; calls: number };
-const empty = (): Totals => ({ spend: 0, reported: 0, unique: 0, calls: 0 });
+export type Totals = { spend: number; reported: number; unique: number; calls: number; jobs: number; completed: number; revenue: number };
+export const empty = (): Totals => ({ spend: 0, reported: 0, unique: 0, calls: 0, jobs: 0, completed: 0, revenue: 0 });
 
 function add(t: Totals, r: FactRow) {
   t.spend += r.spend_usd;
   t.reported += r.reported_leads;
   t.unique += r.unique_leads;
   t.calls += r.calls;
+  t.jobs += r.jobs;
+  t.completed += r.completed_jobs;
+  t.revenue += r.revenue_usd;
 }
 
 // Sum each metric by a key. Each source writes its own rows, so sums never double count:
-// spend and reported leads come from platform rows, unique leads and calls only from call rows.
+// spend and reported leads come from platform rows, unique leads and calls only from call rows,
+// jobs and revenue only from CRM rows.
 export function sumBy(rows: FactRow[], key: (r: FactRow) => string | null) {
   const out = new Map<string, Totals>();
   for (const r of rows) {
@@ -85,6 +105,9 @@ export function lastMonths(rows: FactRow[], n: number) {
 
 // Cost per lead = spend ÷ unique leads (first-time callers on the line 30 seconds or more).
 export const costPerLead = (t: Totals) => (t.unique > 0 ? t.spend / t.unique : null);
+
+// Cost per booked job = spend ÷ jobs booked in the CRM from that channel (canceled jobs excluded).
+export const costPerJob = (t: Totals) => (t.jobs > 0 ? t.spend / t.jobs : null);
 
 // Freshness per source: the latest day loaded and when the fact table was last rebuilt.
 export function freshness(rows: FactRow[]) {
