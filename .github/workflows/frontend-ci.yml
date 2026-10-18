@@ -1,0 +1,64 @@
+name: frontend-ci
+
+on:
+  pull_request:
+    paths:
+      - "web/**"
+      - "tests/**"
+      - ".github/workflows/frontend-ci.yml"
+      - "supabase/migrations/**"
+  workflow_dispatch: {}
+
+concurrency:
+  group: frontend-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install web dependencies
+        working-directory: web
+        run: npm ci
+
+      - name: Audit production dependencies
+        working-directory: web
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Lint
+        working-directory: web
+        run: npm run lint
+
+      - name: Production build
+        working-directory: web
+        run: npm run build -- --webpack
+
+      - name: TypeScript validation
+        working-directory: web
+        run: npx tsc --noEmit
+
+      - name: Python proposal and static security tests
+        if: ${{ hashFiles('tests/**/*.py') != '' }}
+        run: python3 -m unittest discover -s tests -q
+
+      - name: Check PR patch whitespace
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: git diff --check "$BASE_SHA" "$HEAD_SHA"
+
+      - name: Check manual-run patch whitespace
+        if: github.event_name == 'workflow_dispatch'
+        run: git diff --check HEAD^ HEAD
