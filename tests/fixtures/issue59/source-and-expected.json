@@ -1,0 +1,362 @@
+{
+  "classification": "SYNTHETIC fixtures, not historical discrepancies",
+  "timezone": "America/Chicago",
+  "mapping": {
+    "version": "issue59-fixture-v1",
+    "aliases": {
+      "Google Ads": "google_ads",
+      "Google": "unattributed"
+    }
+  },
+  "calls": [
+    {
+      "call_id": "synthetic-call-0",
+      "started_at": "2026-09-22T04:59:59Z",
+      "duration_sec": 30,
+      "first_time_caller": true,
+      "caller_hash": "synthetic-a",
+      "source": "google_ads",
+      "campaign_id": "20814455917",
+      "tracking_number": "synthetic-tracking"
+    },
+    {
+      "call_id": "synthetic-call-1",
+      "started_at": "2026-09-22T05:00:00Z",
+      "duration_sec": 29,
+      "first_time_caller": true,
+      "caller_hash": "synthetic-b",
+      "source": "google_ads",
+      "campaign_id": "20814455917",
+      "tracking_number": "synthetic-tracking"
+    },
+    {
+      "call_id": "synthetic-call-2",
+      "started_at": "2026-09-22T05:01:00Z",
+      "duration_sec": 30,
+      "first_time_caller": true,
+      "caller_hash": "synthetic-c",
+      "source": "google_ads",
+      "campaign_id": "20814455917",
+      "tracking_number": "synthetic-tracking"
+    },
+    {
+      "call_id": "synthetic-call-3",
+      "started_at": "2026-09-22T06:00:00Z",
+      "duration_sec": 90,
+      "first_time_caller": false,
+      "caller_hash": "synthetic-c",
+      "source": "google_ads",
+      "campaign_id": "20814455917",
+      "tracking_number": "synthetic-tracking"
+    },
+    {
+      "call_id": "synthetic-call-4",
+      "started_at": "2026-09-22T07:00:00Z",
+      "duration_sec": 90,
+      "first_time_caller": false,
+      "caller_hash": "synthetic-b",
+      "source": "google_ads",
+      "campaign_id": "20814455917",
+      "tracking_number": "synthetic-tracking"
+    },
+    {
+      "call_id": "synthetic-call-5",
+      "started_at": "2026-09-22T08:00:00Z",
+      "duration_sec": 31,
+      "first_time_caller": true,
+      "caller_hash": "synthetic-d",
+      "source": "synthetic_unknown",
+      "campaign_id": null,
+      "tracking_number": "synthetic-tracking"
+    },
+    {
+      "call_id": "synthetic-call-6",
+      "started_at": "2026-09-22T09:00:00Z",
+      "duration_sec": 30,
+      "first_time_caller": true,
+      "caller_hash": "synthetic-e",
+      "source": "google_ads",
+      "campaign_id": null,
+      "tracking_number": "synthetic-tracking"
+    },
+    {
+      "call_id": "synthetic-call-7",
+      "started_at": "2026-01-02T05:59:59Z",
+      "duration_sec": 30,
+      "first_time_caller": true,
+      "caller_hash": "synthetic-f",
+      "source": "direct",
+      "campaign_id": null,
+      "tracking_number": "synthetic-tracking"
+    },
+    {
+      "call_id": "synthetic-call-8",
+      "started_at": "2026-01-02T06:00:00Z",
+      "duration_sec": 30,
+      "first_time_caller": true,
+      "caller_hash": "synthetic-g",
+      "source": "direct",
+      "campaign_id": null,
+      "tracking_number": "synthetic-tracking"
+    }
+  ],
+  "crm": [
+    {
+      "job_id": "synthetic-job-0",
+      "customer_id": "synthetic-customer-0",
+      "created_at": "2026-09-22T04:59:59Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": "Google Ads",
+      "job_type": "repair",
+      "status": "completed",
+      "revenue_usd": "100.25",
+      "zip": "77040"
+    },
+    {
+      "job_id": "synthetic-job-1",
+      "customer_id": "synthetic-customer-1",
+      "created_at": "2026-09-22T05:00:00Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": "Google Ads",
+      "job_type": "repair",
+      "status": "completed",
+      "revenue_usd": "20.10",
+      "zip": "77040"
+    },
+    {
+      "job_id": "synthetic-job-2",
+      "customer_id": "synthetic-customer-2",
+      "created_at": "2026-09-22T05:01:00Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": "Google Ads",
+      "job_type": "repair",
+      "status": "scheduled",
+      "revenue_usd": null,
+      "zip": "77040"
+    },
+    {
+      "job_id": "synthetic-job-3",
+      "customer_id": "synthetic-customer-3",
+      "created_at": "2026-09-22T05:02:00Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": "Google Ads",
+      "job_type": "repair",
+      "status": "canceled",
+      "revenue_usd": null,
+      "zip": "77040"
+    },
+    {
+      "job_id": "synthetic-job-4",
+      "customer_id": "synthetic-customer-4",
+      "created_at": "2026-09-22T05:03:00Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": "Google Ads",
+      "job_type": "repair",
+      "status": "estimate_sold",
+      "revenue_usd": null,
+      "zip": "77040"
+    },
+    {
+      "job_id": "synthetic-job-5",
+      "customer_id": "synthetic-customer-5",
+      "created_at": "2026-09-22T05:04:00Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": "Google Ads",
+      "job_type": "repair",
+      "status": "estimate_lost",
+      "revenue_usd": null,
+      "zip": "77040"
+    },
+    {
+      "job_id": "synthetic-job-6",
+      "customer_id": "synthetic-customer-6",
+      "created_at": "2026-09-22T06:00:00Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": "Google",
+      "job_type": "repair",
+      "status": "completed",
+      "revenue_usd": "3.05",
+      "zip": "77040"
+    },
+    {
+      "job_id": "synthetic-job-7",
+      "customer_id": "synthetic-customer-7",
+      "created_at": "2026-09-22T06:01:00Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": "synthetic_unknown",
+      "job_type": "repair",
+      "status": "scheduled",
+      "revenue_usd": null,
+      "zip": "77040"
+    },
+    {
+      "job_id": "synthetic-job-8",
+      "customer_id": "synthetic-customer-8",
+      "created_at": "2026-09-22T06:02:00Z",
+      "updated_at": "2026-09-25T12:00:00Z",
+      "lead_source": null,
+      "job_type": "repair",
+      "status": "completed",
+      "revenue_usd": null,
+      "zip": "77040"
+    }
+  ],
+  "expected": [
+    {
+      "bucket": [
+        "2026-09-21",
+        "google_ads",
+        "call_tracking",
+        null,
+        "20814455917",
+        "non_brand"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "call_tracking",
+        null,
+        "20814455917",
+        "non_brand"
+      ],
+      "metrics": {
+        "calls": 4,
+        "first_time_calls": 2,
+        "returning_calls": 2,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "unattributed",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 1
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "call_tracking",
+        null,
+        null,
+        null
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 1
+      }
+    },
+    {
+      "bucket": [
+        "2026-01-01",
+        "direct",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-01-02",
+        "direct",
+        "call_tracking",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "calls": 1,
+        "first_time_calls": 1,
+        "returning_calls": 0,
+        "unique_leads": 1,
+        "unresolved_calls": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-21",
+        "google_ads",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "jobs": 1,
+        "completed_jobs": 1,
+        "revenue_usd": "100.25",
+        "known_completed_revenue_usd": "100.25",
+        "missing_completed_revenue_jobs": 0,
+        "unresolved_jobs": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "google_ads",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "jobs": 5,
+        "completed_jobs": 1,
+        "revenue_usd": "20.10",
+        "known_completed_revenue_usd": "20.10",
+        "missing_completed_revenue_jobs": 0,
+        "unresolved_jobs": 0
+      }
+    },
+    {
+      "bucket": [
+        "2026-09-22",
+        "unattributed",
+        "crm",
+        null,
+        null,
+        "not_applicable"
+      ],
+      "metrics": {
+        "jobs": 3,
+        "completed_jobs": 2,
+        "revenue_usd": null,
+        "known_completed_revenue_usd": "3.05",
+        "missing_completed_revenue_jobs": 1,
+        "unresolved_jobs": 3
+      }
+    }
+  ]
+}
