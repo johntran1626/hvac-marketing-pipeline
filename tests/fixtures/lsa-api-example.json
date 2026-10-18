@@ -1,0 +1,19 @@
+{
+  "provenance": "Illustrative LSA response copied from docs/API.md; not live production evidence.",
+  "response": {
+    "data": [
+      {
+        "lead_id": "lsa_001455",
+        "lead_created_at": "2026-09-21T18:05:52Z",
+        "category": "HVAC",
+        "lead_type": "MESSAGE",
+        "charge_status": "CHARGED",
+        "credited_at": null,
+        "cost_usd": 72.4
+      }
+    ],
+    "paging": {
+      "next_cursor": null
+    }
+  }
+}
