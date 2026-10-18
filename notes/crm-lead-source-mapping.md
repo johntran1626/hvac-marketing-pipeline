@@ -29,12 +29,8 @@ Anything not in the table, including a blank source, is **Unattributed**.
 - **`saw truck`, `truck`, `yard sign` are Direct.**
 - **`customer`, `repeat`, `plan` and similar are existing customers or the maintenance plan**, not marketing.
 
-## Team sign-off
+## Status
 
-Hamza (M2 feedback, Oct 15): "Agree on the mapping, then put Meta's jobs next to its phone leads for the same months." Each of us confirms on #31:
-
-- [ ] John
-- [ ] Kelsey
-- [ ] Ruslan
+Agreed by the team (John, Kelsey, Ruslan) after Hamza's M2 feedback (Oct 15): "Agree on the mapping, then put Meta's jobs next to its phone leads for the same months."
 
 To change a label, edit the `values` list in the latest `rebuild_fact_marketing_daily()` migration and this file together, then run worker-sync.
