@@ -2,6 +2,8 @@
 
 Run from the repo root:  python3 -m unittest discover -s worker/tests -t . -v
 """
+import contextlib
+import io
 import unittest
 from datetime import date, timedelta
 
@@ -85,7 +87,8 @@ class Alerting(unittest.TestCase):
 
         real, alerts.send = alerts.send, fake_send
         try:
-            self.assertEqual(alerts.notify([a, b], "owner/repo", "token"), [81])
+            with contextlib.redirect_stdout(io.StringIO()):  # keep fake "opened issue" lines out of CI logs
+                self.assertEqual(alerts.notify([a, b], "owner/repo", "token"), [81])
         finally:
             alerts.send = real
         posts = [body for method, body in sent if method == "POST"]
