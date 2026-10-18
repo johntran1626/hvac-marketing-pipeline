@@ -106,3 +106,50 @@ export function centralYesterday(now = new Date()) {
   d.setUTCDate(d.getUTCDate() - 1);
   return d.toISOString().slice(0, 10);
 }
+
+// Tracking alerts: the same rule as worker/alerts.py (#62), which opens a GitHub issue for each one.
+// A paid channel spends for 3+ days in a row with 0 reported leads, and its previous 28 days say
+// it should have brought 7+ leads in that stretch (zero is then less than a 1 in 1,000 chance).
+const ALERT_MIN_DAYS = 3;
+const ALERT_BASELINE_DAYS = 28;
+const ALERT_MIN_EXPECTED = 7;
+
+export type Anomaly = { channel: string; start: string; end: string; days: number; spend: number; expected: number };
+
+const addDays = (d: string, n: number) => {
+  const t = new Date(`${d}T12:00:00Z`);
+  t.setUTCDate(t.getUTCDate() + n);
+  return t.toISOString().slice(0, 10);
+};
+
+export function anomalies(rows: FactRow[]): Anomaly[] {
+  const found: Anomaly[] = [];
+  for (const channel of PAID_CHANNELS) {
+    const byDay = sumBy(rows.filter((r) => r.channel === channel), (r) => r.analysis_date);
+    let streak: string[] = [];
+    for (const day of [...[...byDay.keys()].sort(), null]) {
+      const t = day ? byDay.get(day)! : null;
+      if (day && t && t.spend > 0 && t.reported === 0 && (!streak.length || day === addDays(streak.at(-1)!, 1))) {
+        streak.push(day);
+        continue;
+      }
+      if (streak.length >= ALERT_MIN_DAYS) {
+        let baseline = 0;
+        for (let i = 1; i <= ALERT_BASELINE_DAYS; i++) baseline += byDay.get(addDays(streak[0], -i))?.reported ?? 0;
+        const expected = (baseline / ALERT_BASELINE_DAYS) * streak.length;
+        if (expected >= ALERT_MIN_EXPECTED) {
+          found.push({
+            channel,
+            start: streak[0],
+            end: streak.at(-1)!,
+            days: streak.length,
+            spend: streak.reduce((s, d) => s + byDay.get(d)!.spend, 0),
+            expected,
+          });
+        }
+      }
+      streak = day && t && t.spend > 0 && t.reported === 0 ? [day] : [];
+    }
+  }
+  return found.sort((a, b) => b.start.localeCompare(a.start));
+}
