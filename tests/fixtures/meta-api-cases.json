@@ -1,0 +1,912 @@
+{
+  "provenance": "Baseline copied from illustrative docs/API.md sample; variations are synthetic, not live evidence.",
+  "cases": [
+    {
+      "name": "documented_api_example",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Normalize documented sample; unknown campaign remains unclassified",
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    },
+    {
+      "name": "empty_actions",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": []
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Zero reported leads, not zero qualified callers",
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "0"
+        }
+      ]
+    },
+    {
+      "name": "multiple_action_types",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "link_click",
+                  "value": "8"
+                },
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Only exact lead action contributes",
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    },
+    {
+      "name": "recent_restatement",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        },
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "4"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Same key, independently normalized reported leads 3 then 4; caller chooses current version",
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        },
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "4"
+        }
+      ]
+    },
+    {
+      "name": "restatement_to_zero",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        },
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": []
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Same key, independently normalized reported leads 3 then 0",
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        },
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "0"
+        }
+      ]
+    },
+    {
+      "name": "two_pages",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": "opaque-synthetic-cursor"
+          }
+        },
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560102",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Distinct ad-set keys; no paging or persistence performed",
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        },
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560102",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    },
+    {
+      "name": "no_rows",
+      "responses": [
+        {
+          "data": [],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "No contributions; no claim about window completeness",
+      "expected_outputs": []
+    },
+    {
+      "name": "same_campaign_adset_other_account",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        },
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_synthetic_other",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Distinct account keys",
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        },
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_synthetic_other",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    },
+    {
+      "name": "name_change_same_key",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        },
+        {
+          "data": [
+            {
+              "date_start": "2026-09-20",
+              "date_stop": "2026-09-20",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Synthetic renamed campaign",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Preserve changed name without changing natural key",
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        },
+        {
+          "analysis_date": "2026-09-20",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Synthetic renamed campaign",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    },
+    {
+      "name": "pacific_date_boundary",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-10-03",
+              "date_stop": "2026-10-03",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Keep Pacific account date",
+      "utc_bounds": [
+        "2026-10-03T07:00:00+00:00",
+        "2026-10-04T07:00:00+00:00"
+      ],
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-10-03",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    },
+    {
+      "name": "spring_dst",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-03-08",
+              "date_stop": "2026-03-08",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Keep account day; UTC bounds are explanatory, never rebucket the aggregate",
+      "utc_bounds": [
+        "2026-03-08T08:00:00+00:00",
+        "2026-03-09T07:00:00+00:00"
+      ],
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-03-08",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    },
+    {
+      "name": "fall_dst",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-11-01",
+              "date_stop": "2026-11-01",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Keep account day; UTC bounds are explanatory, never rebucket the aggregate",
+      "utc_bounds": [
+        "2026-11-01T07:00:00+00:00",
+        "2026-11-02T08:00:00+00:00"
+      ],
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-11-01",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    },
+    {
+      "name": "winter_boundary",
+      "responses": [
+        {
+          "data": [
+            {
+              "date_start": "2026-01-01",
+              "date_stop": "2026-01-01",
+              "account_id": "act_1029384756",
+              "campaign_id": "23851234560001",
+              "campaign_name": "Lead Gen - AC Tune-Up",
+              "adset_id": "23851234560101",
+              "adset_name": "Homeowners 30-65",
+              "impressions": "859",
+              "clicks": "8",
+              "spend": "41.65",
+              "actions": [
+                {
+                  "action_type": "lead",
+                  "value": "3"
+                }
+              ]
+            }
+          ],
+          "paging": {
+            "next_cursor": null
+          }
+        }
+      ],
+      "expectation": "Keep account day; UTC bounds are explanatory, never rebucket the aggregate",
+      "utc_bounds": [
+        "2026-01-01T08:00:00+00:00",
+        "2026-01-02T08:00:00+00:00"
+      ],
+      "expected_outputs": [
+        {
+          "analysis_date": "2026-01-01",
+          "channel": "meta",
+          "source_platform": "meta_ads",
+          "source_account_id": "act_1029384756",
+          "campaign_id": "23851234560001",
+          "campaign_name": "Lead Gen - AC Tune-Up",
+          "adset_id": "23851234560101",
+          "adset_name": "Homeowners 30-65",
+          "brand_classification": null,
+          "impressions": 859,
+          "clicks": 8,
+          "spend_usd": "41.65",
+          "reported_leads": "3"
+        }
+      ]
+    }
+  ],
+  "negative_cases": [
+    {
+      "name": "duplicate_lead_totals",
+      "changes": {
+        "actions": [
+          {
+            "action_type": "lead",
+            "value": "3"
+          },
+          {
+            "action_type": "lead",
+            "value": "3"
+          }
+        ]
+      },
+      "error_field": "actions.lead"
+    },
+    {
+      "name": "attribution_breakdown",
+      "changes": {
+        "actions": [
+          {
+            "action_type": "lead",
+            "value": "3",
+            "1d_click": "2"
+          }
+        ]
+      },
+      "error_field": "actions.lead"
+    },
+    {
+      "name": "padded_account",
+      "changes": {
+        "account_id": " act_1029384756"
+      },
+      "error_field": "account_id"
+    },
+    {
+      "name": "blank_campaign_name",
+      "changes": {
+        "campaign_name": " "
+      },
+      "error_field": "campaign_name"
+    },
+    {
+      "name": "missing_actions",
+      "changes": {
+        "actions": null
+      },
+      "error_field": "actions"
+    },
+    {
+      "name": "missing_lead_value",
+      "changes": {
+        "actions": [
+          {
+            "action_type": "lead"
+          }
+        ]
+      },
+      "error_field": "actions.lead.value"
+    },
+    {
+      "name": "blank_action_type",
+      "changes": {
+        "actions": [
+          {
+            "action_type": "",
+            "value": "3"
+          }
+        ]
+      },
+      "error_field": "actions.action_type"
+    },
+    {
+      "name": "padded_action_type",
+      "changes": {
+        "actions": [
+          {
+            "action_type": "lead ",
+            "value": "3"
+          }
+        ]
+      },
+      "error_field": "actions.action_type"
+    },
+    {
+      "name": "multi_day_aggregate",
+      "changes": {
+        "date_stop": "2026-09-21"
+      },
+      "error_field": "date_stop"
+    },
+    {
+      "name": "timestamp_instead_of_day",
+      "changes": {
+        "date_start": "2026-03-08T00:00:00-08:00"
+      },
+      "error_field": "date_start"
+    },
+    {
+      "name": "nonfinite_spend",
+      "changes": {
+        "spend": "NaN"
+      },
+      "error_field": "spend"
+    }
+  ]
+}
