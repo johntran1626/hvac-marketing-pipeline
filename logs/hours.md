@@ -20,6 +20,10 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-08 | 2.0 | Built the M2 worker: saved sync progress, LSA and Google Ads loaders, daily Actions workflow; ran the migrations, backfilled Google Ads, tested kill and resume, added Actions secrets, opened PRs | #25, #26, #28, #32, #43–#46 |
 | 2026-10-10 | 2.0 | Helped Ruslan get the API key set up locally; agreed the unique-lead rule and lead summing with the team; planned the fact table rebuild and dashboard | #32, #31, #33 |
 | 2026-10-11 | 3.0 | Reviewed and merged the M2 PRs (#43 to #51); built the Meta loader, fact table rebuild and dashboard (#52); ran the migrations, set the Vercel env vars, ran the sync workflow; moved the daily sync to the evening (#53); audited M2 and closed the finished issues | #27, #30, #32, #33, #34, #35 |
+| 2026-10-15 | 1.5 | Planned M3 with the team; ran Kelsey's eval (#72) locally; built the tracking alerts section on the dashboard | #62, #72, #81 |
+| 2026-10-16 | 1.0 | Reviewed Kelsey's dashboard redesign (#83) and CI (#82) locally against live data; team meeting on the redesign | #83, #82 |
+| 2026-10-17 | 0.7 | Team call on making the redesign the dashboard; planned the integration | #83, #91 |
+| 2026-10-18 | 2.0 | Reviewed and merged #80, #81, #84, #85; ran the CRM jobs migration and the alert runs (issues #87-#89); added booked jobs (#86); integrated the redesign (#91); merged Kelsey's #72-#79 and #82; closed M3 issues; ran the M3 audit | #62, #63, #84, #91 |
 
 ## Kelsey Mellor
 
