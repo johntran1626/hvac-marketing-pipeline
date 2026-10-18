@@ -1,0 +1,11 @@
+"use client";
+import { useState } from 'react';
+export type Evidence = { source:string; period:string|null; metric:string; status:string|null; value:number|null; through:string|null; synced:string|null; effect:string };
+const columns: {key:keyof Evidence;label:string;type:'text'|'date'|'number'|'status'}[]=[{key:'source',label:'Source',type:'text'},{key:'period',label:'Month',type:'date'},{key:'metric',label:'Metric',type:'text'},{key:'status',label:'Status',type:'status'},{key:'value',label:'Value',type:'number'},{key:'through',label:'Data through',type:'date'},{key:'synced',label:'Last refreshed',type:'text'},{key:'effect',label:'Note',type:'text'}];
+export default function EvidenceTable({rows}:{rows:Evidence[]}) {
+ const [sort,setSort]=useState<{key:keyof Evidence;direction:1|-1}>({key:'source',direction:1});
+ const type=columns.find(c=>c.key===sort.key)!.type;
+ const rank:Record<string,number>={Missing:0,Null:1,Stale:2,Zero:3,Loaded:4};
+ const sorted=[...rows].sort((a,b)=>{const av=sort.key==='status'&&a.status==='Missing'?null:a[sort.key],bv=sort.key==='status'&&b.status==='Missing'?null:b[sort.key];if(av===null)return bv===null?0:1;if(bv===null)return -1;const value=(v:string|number)=>type==='date'?Date.parse(String(v).length===7?`${v}-01`:String(v)):type==='status'?rank[String(v)]:v;const aa=value(av),bb=value(bv);return sort.direction*(typeof aa==='number'&&typeof bb==='number'?aa-bb:String(aa).localeCompare(String(bb),undefined,{numeric:true}));});
+ return <><p className="sr-only" aria-live="polite">Sorted by {columns.find(c=>c.key===sort.key)!.label}, {sort.direction===1?'ascending':'descending'}. Missing values last.</p><div className="table-scroll"><table><caption>Data by source and month · sort any column; missing values last</caption><thead><tr>{columns.map(c=><th key={c.key} aria-sort={sort.key===c.key?(sort.direction===1?'ascending':'descending'):'none'}><button className="sort-button" onClick={()=>setSort({key:c.key,direction:sort.key===c.key&&sort.direction===1?-1:1})}>{c.label} {sort.key===c.key?(sort.direction===1?'↑':'↓'):'↕'}</button></th>)}</tr></thead><tbody>{sorted.map(r=><tr key={`${r.source}|${r.period}|${r.metric}`}>{columns.map(c=><td key={c.key}>{r[c.key]===null?'–':c.type==='number'?Number(r[c.key]).toLocaleString('en-US',{maximumFractionDigits:2}):r[c.key]}</td>)}</tr>)}</tbody></table></div></>;
+}
