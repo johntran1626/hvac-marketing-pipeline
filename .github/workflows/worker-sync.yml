@@ -6,7 +6,17 @@ name: worker-sync
 on:
   schedule:
     - cron: "47 0 * * *"  # not :00, busy minutes get delayed or dropped
-  workflow_dispatch: {}    # "Run workflow" button on the Actions tab
+  workflow_dispatch:       # "Run workflow" button on the Actions tab
+    inputs:
+      alert_since:
+        description: "Anomaly alert: replay streaks ending on or after this day (YYYY-MM-DD). Empty = last 14 days."
+        required: false
+        default: ""
+
+# The alert step opens an issue per new anomaly (#62) with the built-in token. Nothing else is written.
+permissions:
+  contents: read
+  issues: write
 
 # Never run two syncs at once: they would fight over sync_state.
 concurrency:
@@ -30,3 +40,10 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
           LAB_API_KEY: ${{ secrets.LAB_API_KEY }}
+      - name: Anomaly alert (opens one issue per new anomaly)
+        run: python -m worker.alerts --notify ${ALERT_SINCE:+--since "$ALERT_SINCE"}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ALERT_SINCE: ${{ inputs.alert_since }}
