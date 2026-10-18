@@ -17,6 +17,8 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-02 | 4.0 | Backfilled all LSA leads into Supabase, deployed the site to Vercel, filled the dashboard table so /health works, reviewed Kelsey's schema and memo PRs, team planning | #8, #11, #19, #20, #21 |
 | 2026-10-03 | 1.0 | Reviewed and approved Kelsey's PRs, merged Kelsey's hours PR, cleaned up PR descriptions and checkboxes, created and organized the M2 issues | #15, #16, #17, #19, #24, #25–#37 |
 | 2026-10-04 | 1.5 | Ran the final M1 audit, reviewed and merged Ruslan's PR, removed the empty hours section, sent the M1 submission to Hamza | #12, #39, #40 |
+| 2026-10-05 | 1.0 | Read Hamza's M1 feedback; opened and merged my Oct 4 hours fix | #41 |
+| 2026-10-06 | 1.0 | Reviewed and merged Kelsey's Oct 2 hours fix; planned the M1 fixes and M2 start | #42 |
 | 2026-10-08 | 2.0 | Built the M2 worker: saved sync progress, LSA and Google Ads loaders, daily Actions workflow; ran the migrations, backfilled Google Ads, tested kill and resume, added Actions secrets, opened PRs | #25, #26, #28, #32, #43–#46 |
 | 2026-10-10 | 2.0 | Helped Ruslan get the API key set up locally; agreed the unique-lead rule and lead summing with the team; planned the fact table rebuild and dashboard | #32, #31, #33 |
 | 2026-10-11 | 3.0 | Reviewed and merged the M2 PRs (#43 to #51); built the Meta loader, fact table rebuild and dashboard (#52); ran the migrations, set the Vercel env vars, ran the sync workflow; moved the daily sync to the evening (#53); audited M2 and closed the finished issues | #27, #30, #32, #33, #34, #35 |
