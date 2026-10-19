@@ -43,3 +43,7 @@ Locally it reads `SUPABASE_URL` and `SUPABASE_SECRET_KEY` from `.env.local`. `--
 - Platform numbers for the last 7 days can still change (docs/API.md), so a fresh streak can fill in later. The issue says so.
 - It watches reported leads, not calls. A channel whose calls drop while its platform still reports leads is not caught.
 - A low-volume channel needs a longer streak to fire: at 1 lead a day, 7 zero days in a row.
+
+## Oct 19 check against the API (#87)
+
+Re-pulling Meta from the API showed 11 leads on Oct 4–8 that our database didn't have. The worker re-pulled only 7 days counting the newest day, so the day exactly 7 days back was never pulled again, and leads that arrived for it were missed (Google Ads conversions too). The refresh is now 8 days, and Oct 1–11 were re-pulled once. The Oct 4–8 alert (#87) was a false alarm. Aug 4–10 (#89) still shows 0 leads in the API.
