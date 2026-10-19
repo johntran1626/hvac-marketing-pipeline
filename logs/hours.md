@@ -46,6 +46,8 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-10 | 1.5 | Directed and reviewed paid-source persistence and dashboard work; examined tests and integration concerns | #30, #33, PR #50 |
 | 2026-10-11 | 1.5 | Reviewed PR #50 and Calls/CRM integration results, coordinated with team and prepared submission evidence | #30, #31, PR #50 |
 | 2026-10-14 | 2.5 | Coordinated M3 implementation and testing, reviewed seven draft PRs, organized independent code audits, verified findings, and addressed Google Ads review feedback | #58, #59, #65–#69, PRs #72–#78 |
+| 2026-10-16 | 2.5 | Implemented and locally tested the KPI-first dashboard redesign, reviewed feedback, and coordinated the dashboard integration | #83, #82 |
+| 2026-10-18 | 0.5 | Inspected assigned dashboard PRs, ran an independent code review, and submitted a request for changes on #94 | #81, #91, #94 |
 
 ## Ruslan Buhayenko
 
