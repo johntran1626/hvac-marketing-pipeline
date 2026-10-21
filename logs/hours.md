@@ -26,6 +26,7 @@ Save as `logs/hours.md`. One file for the group, one section per person.
 | 2026-10-16 | 1.0 | Reviewed Kelsey's dashboard redesign (#83) and CI (#82) locally against live data; team meeting on the redesign | #83, #82 |
 | 2026-10-17 | 0.7 | Team call on making the redesign the dashboard; planned the integration | #83, #91 |
 | 2026-10-18 | 2.0 | Reviewed and merged #80, #81, #84, #85; ran the CRM jobs migration and the alert runs (issues #87-#89); added booked jobs (#86); integrated the redesign (#91); merged Kelsey's #72-#79 and #82; closed M3 issues; ran the M3 audit | #62, #63, #84, #91 |
+| 2026-10-19 | 1.5 | Wrote the Loom script, recorded and edited the M3 Loom of the live dashboard and a worker run, and sent it to Hamza | #63 |
 
 ## Kelsey Mellor
 
